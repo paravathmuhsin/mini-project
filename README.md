@@ -1,1 +1,1 @@
-# mini project 
+# Sample project 

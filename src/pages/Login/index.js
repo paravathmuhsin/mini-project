@@ -8,17 +8,33 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 export default function Login() {
+  const [form, setForm] = React.useState({ email: "", password: "" });
+  const nav = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const { email, password } = form;
+    // api
+    if (email === "test@gmail.com" && password === "12345") {
+      localStorage.setItem("token", "vbuiewfiwgeifg3478gf8734f8g4");
+      localStorage.setItem("isLogin", true);
+      localStorage.setItem(
+        "loggedUser",
+        JSON.stringify({ name: "Muhsin", country: "India" })
+      );
+      nav("/");
+    } else {
+      alert("Invalid details");
+    }
+  };
+
+  const changeHandler = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   return (
@@ -54,6 +70,8 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={form.email}
+              onChange={changeHandler}
             />
             <TextField
               margin="normal"
@@ -64,6 +82,8 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={form.password}
+              onChange={changeHandler}
             />
             <Button
               type="submit"

@@ -18,9 +18,10 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { Avatar, Menu, MenuItem, Tooltip } from "@mui/material";
 import { Logout, Settings } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -67,12 +68,13 @@ const Drawer = styled(MuiDrawer, {
     }),
   },
 }));
-
 const mdTheme = createTheme();
 
 const Layout = () => {
   const [open, setOpen] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { isLogin, loggedUser } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
   const nav = useNavigate();
   const menuOpen = Boolean(anchorEl);
   const toggleDrawer = () => {
@@ -86,13 +88,14 @@ const Layout = () => {
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('isLogin');
-    localStorage.removeItem('loggedUser');
+    localStorage.removeItem("token");
+    localStorage.removeItem("isLogin");
+    localStorage.removeItem("loggedUser");
+    dispatch({ type: "SET_LOGOUT" });
     nav("/login");
   };
 
-  return (
+  return isLogin ? (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
@@ -132,7 +135,9 @@ const Layout = () => {
                 aria-haspopup="true"
                 aria-expanded={menuOpen ? "true" : undefined}
               >
-                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                <Avatar sx={{ width: 32, height: 32 }}>
+                  {loggedUser.name[0]}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -244,6 +249,8 @@ const Layout = () => {
         </Box>
       </Box>
     </ThemeProvider>
+  ) : (
+    <Navigate to="/login" />
   );
 };
 export default Layout;

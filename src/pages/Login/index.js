@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setLogin } from "../../store/actions/login-action";
 
 const theme = createTheme();
 
@@ -27,10 +28,7 @@ export default function Login() {
       localStorage.setItem("token", "vbuiewfiwgeifg3478gf8734f8g4");
       localStorage.setItem("isLogin", true);
       localStorage.setItem("loggedUser", JSON.stringify(user));
-      dispatch({
-        type: "SET_LOGIN",
-        payload: user,
-      });
+      dispatch(setLogin(user));
       nav("/");
     } else {
       alert("Invalid details");

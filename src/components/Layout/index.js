@@ -22,6 +22,7 @@ import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { Avatar, Menu, MenuItem, Tooltip } from "@mui/material";
 import { Logout, Settings } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
+import { setLogout } from "../../store/actions/login-action";
 
 const drawerWidth = 240;
 
@@ -91,7 +92,7 @@ const Layout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("isLogin");
     localStorage.removeItem("loggedUser");
-    dispatch({ type: "SET_LOGOUT" });
+    dispatch(setLogout());
     nav("/login");
   };
 
@@ -210,7 +211,7 @@ const Layout = () => {
                 <ListItemIcon>
                   <DashboardIcon />
                 </ListItemIcon>
-                <ListItemText primary="Home" />
+                <ListItemText primary="Post" />
               </ListItemButton>
             </Link>
             <Link to={"/users"}>

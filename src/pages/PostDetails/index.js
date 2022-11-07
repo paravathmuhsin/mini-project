@@ -4,6 +4,7 @@ import { getPost } from "../../services/post-service";
 
 const PostDetails = () => {
   const { id } = useParams();
+  //doubt above
   const [post, setPost] = useState(null);
   useEffect(() => {
     getPost(id).then((res) => {

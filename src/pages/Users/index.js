@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getUsers } from '../../services/userService'
+import { getUsers } from "../../services/userService";
 
 const Users = () => {
-    const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     getUsers().then((res) => {
       setUsers(res);
@@ -21,6 +21,6 @@ const Users = () => {
       ))}
     </div>
   );
-}
+};
 
 export default Users;

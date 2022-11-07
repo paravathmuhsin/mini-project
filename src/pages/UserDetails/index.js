@@ -17,7 +17,7 @@ const UserDetails = () => {
           <h2>{user.name}</h2>
           <p>{user.username}</p>
           <p>{user.email}</p>
-          <p>{user.address}</p>
+          <p>{user.address.city}</p>
         </div>
       ) : null}
     </div>

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPosts } from "../../services/post-service";
+import { useAppContext } from "../../utility/context";
 
 const Post = () => {
   const [posts, setPosts] = useState([]);
+  const { updateTitle } = useAppContext();
   useEffect(() => {
+    updateTitle("Post");
     getPosts().then((res) => {
       setPosts(res);
     });

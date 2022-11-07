@@ -23,6 +23,7 @@ import { Avatar, Menu, MenuItem, Tooltip } from "@mui/material";
 import { Logout, Settings } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../../store/actions/login-action";
+import { useAppContext } from "../../utility/context";
 
 const drawerWidth = 240;
 
@@ -77,6 +78,7 @@ const Layout = () => {
   const { isLogin, loggedUser } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const nav = useNavigate();
+  const { appTitle } = useAppContext();
   const menuOpen = Boolean(anchorEl);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -125,7 +127,7 @@ const Layout = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              {appTitle}
             </Typography>
             <Tooltip title="Account settings">
               <IconButton

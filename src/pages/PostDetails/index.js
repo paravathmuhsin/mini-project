@@ -5,6 +5,7 @@ import { useAppContext } from "../../utility/context";
 
 const PostDetails = () => {
   const { id } = useParams();
+  //doubt above
   const [post, setPost] = useState(null);
   const { updateTitle } = useAppContext();
   useEffect(() => {

@@ -6,6 +6,8 @@ const ErrorPage = React.lazy(() => import("./ErrorPage"));
 const Layout = React.lazy(() => import("./Layout"));
 const Post = React.lazy(() => import("../pages/Post"));
 const PostDetails = React.lazy(() => import("../pages/PostDetails"));
+const Users = React.lazy(() => import("../pages/Users"));
+const UserDetails=React.lazy(()=>import("../pages/UserDetails"));
 
 const routes = createBrowserRouter([
   {
@@ -23,7 +25,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "users",
-        element: <h4>User</h4>,
+        element: <Users/>,
+      },
+      {
+        path: "users/:id",
+        element: <UserDetails/>,
       },
     ],
   },

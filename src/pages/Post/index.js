@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getPosts } from "../../services/post-service";
+import { getPostsAction } from "../../store/actions/post-action";
+// import { getPosts } from "../../services/post-service";
 import { useAppContext } from "../../utility/context";
 
 const Post = () => {
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
   const { updateTitle } = useAppContext();
+  const { posts } = useSelector((state) => state.post);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     updateTitle("Post");
-    getPosts().then((res) => {
-      setPosts(res);
-    });
+    if (!posts.length) {
+      dispatch(getPostsAction());
+    }
+    // getPosts().then((res) => {
+    //   setPosts(res);
+    // });
   }, []);
   return (
     <div>

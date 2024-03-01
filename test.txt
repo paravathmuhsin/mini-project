@@ -1,4 +1,4 @@
 Hiii
 This is my first commit for learing
-resolve conflict
+test conflict
 This is for dev branch

@@ -1,4 +1,0 @@
-Hiii
-This is my first commit for learing
-test conflict
-This is for dev branch

@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import AppLayout from "../AppLayout/AppLayout";
 
 const Home = lazy(() => import("../../pages/Home/Home"));
 const Login = lazy(() => import("../../pages/Login/Login"));
@@ -8,7 +9,13 @@ const Login = lazy(() => import("../../pages/Login/Login"));
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <AppLayout />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+    ],
   },
   {
     path: "/login",

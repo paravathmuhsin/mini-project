@@ -10,7 +10,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyright from "../../components/Copyright/Copyright";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const defaultTheme = createTheme();
 
@@ -18,6 +19,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const nav = useNavigate();
+  const { isLoggedin } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
 
   const changeHandler = (e) => {
     if (e.target.name === "email") {
@@ -30,13 +33,26 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email === "test@gmail.com" && password === "12345") {
-      nav('/')
+      const loggedUser = {
+        name: "David",
+        email: "test@gmail.com",
+        country: "IN",
+      };
+      localStorage.setItem('isLoggedin', true);
+      localStorage.setItem('loggedUser', JSON.stringify(loggedUser));
+      dispatch({
+        type: "SET_LOGIN",
+        payload: loggedUser,
+      });
+      nav("/");
     } else {
       alert("Invalid login");
     }
   };
 
-  return (
+  return isLoggedin ? (
+    <Navigate to={"/"} />
+  ) : (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />

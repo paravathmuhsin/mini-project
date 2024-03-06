@@ -24,9 +24,10 @@ import {
   Tooltip,
 } from "@mui/material";
 import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import Copyright from "../Copyright/Copyright";
 import { Logout, Settings } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -80,6 +81,8 @@ const defaultTheme = createTheme();
 export default function AppLayout() {
   const [open, setOpen] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { isLoggedin } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
 
   const nav = useNavigate();
 
@@ -97,10 +100,12 @@ export default function AppLayout() {
   };
   const logout = () => {
     handleClose();
+    localStorage.clear();
+    dispatch({ type: "SET_LOGOUT" });
     nav("/login");
   };
 
-  return (
+  return isLoggedin ? (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
@@ -244,5 +249,7 @@ export default function AppLayout() {
         </Box>
       </Box>
     </ThemeProvider>
+  ) : (
+    <Navigate to={"/login"} />
   );
 }

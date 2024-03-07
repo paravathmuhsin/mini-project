@@ -4,6 +4,7 @@ import Loading from "../Loading/Loading";
 import AppLayout from "../AppLayout/AppLayout";
 
 const Home = lazy(() => import("../../pages/Home/Home"));
+const PostDetails = lazy(() => import("../../pages/Home/PostDetails"));
 const Login = lazy(() => import("../../pages/Login/Login"));
 
 const routes = createBrowserRouter([
@@ -14,6 +15,10 @@ const routes = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "post/:id",
+        element: <PostDetails />,
       },
     ],
   },

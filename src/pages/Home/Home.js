@@ -8,19 +8,23 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { getPosts } from "../../services/posts.service";
+import { useAppContext } from "../../components/AppContext/AppContext";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const { setTitle } = useAppContext();
+
   useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then((res) => res.data)
-      .then((res) => {
-        setPosts(res);
-      });
+    getPosts().then((res) => {
+      setPosts(res);
+    });
   }, []);
 
+  useEffect(() => {
+    setTitle("Posts");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <Title>Posts</Title>
@@ -34,7 +38,7 @@ const Home = () => {
           </CardContent>
           <CardActions>
             <Button size="small">
-              <Link to="/"> Learn More</Link>
+              <Link to={"/post/" + item.id}> Learn More</Link>
             </Button>
           </CardActions>
         </Card>

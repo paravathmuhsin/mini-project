@@ -28,6 +28,7 @@ import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import Copyright from "../Copyright/Copyright";
 import { Logout, Settings } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
+import { useAppContext } from "../AppContext/AppContext";
 
 const drawerWidth = 240;
 
@@ -83,6 +84,7 @@ export default function AppLayout() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { isLoggedin } = useSelector((state) => state.login);
   const dispatch = useDispatch();
+  const { title } = useAppContext();
 
   const nav = useNavigate();
 
@@ -134,7 +136,7 @@ export default function AppLayout() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              {title}
             </Typography>
             <Tooltip title="Account settings">
               <IconButton

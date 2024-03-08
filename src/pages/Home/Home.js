@@ -10,15 +10,19 @@ import {
 import { Link } from "react-router-dom";
 import { getPosts } from "../../services/posts.service";
 import { useAppContext } from "../../components/AppContext/AppContext";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const { setTitle } = useAppContext();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getPosts().then((res) => {
       setPosts(res);
     });
+    // dispatch(getPosts());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

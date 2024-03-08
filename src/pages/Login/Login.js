@@ -12,6 +12,7 @@ import Copyright from "../../components/Copyright/Copyright";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setLogin } from "../../store/actions/login.action";
 
 const defaultTheme = createTheme();
 
@@ -40,10 +41,7 @@ export default function Login() {
       };
       localStorage.setItem('isLoggedin', true);
       localStorage.setItem('loggedUser', JSON.stringify(loggedUser));
-      dispatch({
-        type: "SET_LOGIN",
-        payload: loggedUser,
-      });
+      dispatch(setLogin(loggedUser));
       nav("/");
     } else {
       alert("Invalid login");

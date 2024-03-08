@@ -29,6 +29,7 @@ import Copyright from "../Copyright/Copyright";
 import { Logout, Settings } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { useAppContext } from "../AppContext/AppContext";
+import { setLogout } from "../../store/actions/login.action";
 
 const drawerWidth = 240;
 
@@ -103,7 +104,7 @@ export default function AppLayout() {
   const logout = () => {
     handleClose();
     localStorage.clear();
-    dispatch({ type: "SET_LOGOUT" });
+    dispatch(setLogout());
     nav("/login");
   };
 

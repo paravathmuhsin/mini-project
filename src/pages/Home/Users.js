@@ -14,11 +14,9 @@ import { useDispatch } from "react-redux";
 import { getUsers } from "../../services/posts.service";
 
 const Users = () => {
-
   const { setTitle } = useAppContext();
   const [usersData, setUsersData] = useState([]);
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     getUsers()
@@ -28,42 +26,41 @@ const Users = () => {
       .catch((error) => {
         console.error("Error fetching user details:", error);
       });
-  }, []); 
+  }, []);
 
   useEffect(() => {
     setTitle("Users");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return (
-    <>
-      <Title>Users</Title>
-      {usersData.map((item) => (
-        <Card key={item.id} sx={{ minWidth: 275, mb: 2 }}>
-          <CardContent>
-            <Typography variant="h5" component="div">
-              {item.name}
-            </Typography>
-            <Typography variant="body2">{item.email}</Typography>
-            <Typography variant="h6" component="div">
-                {'Address: '}
-              {item.address.street}
-              {','}
-              {item.address.suite}
-              {','}
-              {item.address.city}
-              {','}
-              {item.address.zipcode}
-            </Typography>
 
-          </CardContent>
-          <CardActions>
-            <Button size="small">
-              <Link to={"/user/" + item.id}> More Details</Link>
-            </Button>
-          </CardActions>
-        </Card>
-      ))}
-    </>
+  return (
+    <div style={{ padding: "20px" }}>
+      <Title>Users</Title>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+        {usersData.map((item) => (
+          <Card key={item.id} sx={{ width: "300px" }}>
+            <CardContent>
+              <Typography variant="h5" component="div">
+                {item.name}
+              </Typography>
+              <Typography variant="body2">{item.email}</Typography>
+              <Typography variant="h6" component="div">
+                Address:
+              </Typography>
+              <Typography variant="body2">
+                {item.address.street}, {item.address.suite},{" "}
+                {item.address.city}, {item.address.zipcode}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" component={Link} to={`/user/${item.id}`}>
+                More Details
+              </Button>
+            </CardActions>
+          </Card>
+        ))}
+      </div>
+    </div>
   );
 };
 

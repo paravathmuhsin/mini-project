@@ -22,7 +22,25 @@ import {
   Menu,
   MenuItem,
   Tooltip,
+  
 } from "@mui/material";
+
+
+import { styled as muiStyled } from "@mui/material/styles";
+
+import { createTheme as muiCreateTheme} from "@mui/material/styles";
+
+import { ThemeProvider as muiThemeProvider } from "@mui/material/styles";
+
+import { Avatar as MuiAvatar } from "@mui/material";
+
+import { ListItemText as MuiListItemText } from "@mui/material";
+
+import { List as MuiList, ListItem, ListItemAvatar } from "@mui/material";
+
+import { useEffect } from 'react';
+
+
 import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import Copyright from "../Copyright/Copyright";
@@ -31,9 +49,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAppContext } from "../AppContext/AppContext";
 import { setLogout } from "../../store/actions/login.action";
 
+const UsersSection = ({ users }) => {
+  return (
+    <MuiList>
+      {users.map((user) => (
+        <ListItem key={user.id}>
+          <ListItemAvatar>
+            <MuiAvatar/>
+          </ListItemAvatar>
+          <MuiListItemText primary={user.name} secondary={`${user.email}, ${user.address.toString()}`} />
+        </ListItem>
+      ))}
+    </MuiList>
+  );
+};
+
+
 const drawerWidth = 240;
 
-const AppBar = styled(MuiAppBar, {
+const AppBar = muiStyled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -51,7 +85,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Drawer = styled(MuiDrawer, {
+const Drawer = muiStyled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   "& .MuiDrawer-paper": {
@@ -78,11 +112,15 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 // TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+const defaultTheme = muiCreateTheme();
 
 export default function AppLayout() {
   const [open, setOpen] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+ 
+
+ 
+
   const { isLoggedin } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const { title } = useAppContext();
@@ -109,7 +147,7 @@ export default function AppLayout() {
   };
 
   return isLoggedin ? (
-    <ThemeProvider theme={defaultTheme}>
+    <muiThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -148,7 +186,7 @@ export default function AppLayout() {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
               >
-                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                <MuiAvatar sx={{ width: 32, height: 32 }}>M</MuiAvatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -215,16 +253,30 @@ export default function AppLayout() {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">
+          <MuiList component="nav">
             <Link to={"/"}>
               <ListItemButton>
                 <ListItemIcon>
                   <DynamicFeedIcon />
                 </ListItemIcon>
-                <ListItemText primary="Posts" />
+                <MuiListItemText primary="Posts" />
               </ListItemButton>
             </Link>
-          </List>
+           
+
+
+            <Link to={"/user"}>
+              <ListItemButton>
+                <ListItemIcon>
+                  <DynamicFeedIcon />
+                </ListItemIcon>
+                <MuiListItemText primary="Users" />
+              </ListItemButton>
+            </Link>
+            
+
+
+          </MuiList>
         </Drawer>
         <Box
           component="main"
@@ -250,8 +302,25 @@ export default function AppLayout() {
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
+        //editing from here 
+        {/* <Box component="main" sx={{ flexGrow: 1, height: "100vh", overflow: "auto" }}>
+          <Toolbar />
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                  <Typography component="h2" variant="h6" color="primary" gutterBottom>
+                    Users
+                  </Typography>
+                  <UsersSection users={usersData} />
+                </Paper>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box> */}
+        //editing detail till here
       </Box>
-    </ThemeProvider>
+    </muiThemeProvider>
   ) : (
     <Navigate to={"/login"} />
   );

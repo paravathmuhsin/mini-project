@@ -48,6 +48,10 @@ const UserDetails = () => {
               {'Website: '}
               {user.website}
             </Typography>
+            <Typography variant="h6" component="div">
+              {'Company: '}
+              {user.company.name}
+            </Typography>
           </CardContent>
         </Card>
       )}

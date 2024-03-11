@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Title from "../../components/Title/Title";
 import { Card, CardContent, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { getUserDetails } from "../../services/posts.service";
+import { getUserDetails } from "../../services/user.service";
 
 const UserDetails = () => {
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const UserDetails = () => {
       .catch((error) => {
         console.error("Error fetching user details:", error);
       });
-  }, [id]); 
+  }, [id]);
 
   return (
     <>
@@ -30,26 +30,26 @@ const UserDetails = () => {
             <Typography variant="body2">{user.email}</Typography>
             {user.address && (
               <Typography variant="h6" component="div">
-                {'Address: '}
+                {"Address: "}
                 {user.address.street}
-                {','}
+                {","}
                 {user.address.suite}
-                {','}
+                {","}
                 {user.address.city}
-                {','}
+                {","}
                 {user.address.zipcode}
               </Typography>
             )}
             <Typography variant="h6" component="div">
-              {'Phone: '}
+              {"Phone: "}
               {user.phone}
             </Typography>
             <Typography variant="h6" component="div">
-              {'Website: '}
+              {"Website: "}
               {user.website}
             </Typography>
             <Typography variant="h6" component="div">
-              {'Company: '}
+              {"Company: "}
               {user.company.name}
             </Typography>
           </CardContent>
@@ -60,4 +60,3 @@ const UserDetails = () => {
 };
 
 export default UserDetails;
-

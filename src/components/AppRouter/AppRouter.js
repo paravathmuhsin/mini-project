@@ -2,11 +2,11 @@ import { Suspense, lazy } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import AppLayout from "../AppLayout/AppLayout";
-import Users from "../../pages/Home/Users";
-import UserDetails from "../../pages/Home/UserDetails";
 
 const Home = lazy(() => import("../../pages/Home/Home"));
 const PostDetails = lazy(() => import("../../pages/Home/PostDetails"));
+const Users = lazy(() => import("../../pages/User/Users"));
+const UserDetails = lazy(() => import("../../pages/User/UserDetails"));
 const Login = lazy(() => import("../../pages/Login/Login"));
 
 const routes = createBrowserRouter([
@@ -24,12 +24,12 @@ const routes = createBrowserRouter([
       },
       {
         path: "user",
-        element: <Users/>
+        element: <Users />,
       },
       {
         path: "user/:id",
-        element: <UserDetails/>
-      }
+        element: <UserDetails />,
+      },
     ],
   },
   {

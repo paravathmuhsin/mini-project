@@ -1,11 +1,9 @@
 import * as React from "react";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -15,31 +13,23 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import {
-  Avatar,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
   Menu,
   MenuItem,
+  ThemeProvider,
   Tooltip,
-  
 } from "@mui/material";
-
 
 import { styled as muiStyled } from "@mui/material/styles";
 
-import { createTheme as muiCreateTheme} from "@mui/material/styles";
-
-import { ThemeProvider as muiThemeProvider } from "@mui/material/styles";
+import { createTheme as muiCreateTheme } from "@mui/material/styles";
 
 import { Avatar as MuiAvatar } from "@mui/material";
 
 import { ListItemText as MuiListItemText } from "@mui/material";
 
-import { List as MuiList, ListItem, ListItemAvatar } from "@mui/material";
-
-import { useEffect } from 'react';
-
+import { List as MuiList,} from "@mui/material";
 
 import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
@@ -48,22 +38,6 @@ import { Logout, Settings } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { useAppContext } from "../AppContext/AppContext";
 import { setLogout } from "../../store/actions/login.action";
-
-const UsersSection = ({ users }) => {
-  return (
-    <MuiList>
-      {users.map((user) => (
-        <ListItem key={user.id}>
-          <ListItemAvatar>
-            <MuiAvatar/>
-          </ListItemAvatar>
-          <MuiListItemText primary={user.name} secondary={`${user.email}, ${user.address.toString()}`} />
-        </ListItem>
-      ))}
-    </MuiList>
-  );
-};
-
 
 const drawerWidth = 240;
 
@@ -117,9 +91,6 @@ const defaultTheme = muiCreateTheme();
 export default function AppLayout() {
   const [open, setOpen] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
- 
-
- 
 
   const { isLoggedin } = useSelector((state) => state.login);
   const dispatch = useDispatch();
@@ -147,7 +118,7 @@ export default function AppLayout() {
   };
 
   return isLoggedin ? (
-    <muiThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -262,8 +233,6 @@ export default function AppLayout() {
                 <MuiListItemText primary="Posts" />
               </ListItemButton>
             </Link>
-           
-
 
             <Link to={"/user"}>
               <ListItemButton>
@@ -273,9 +242,6 @@ export default function AppLayout() {
                 <MuiListItemText primary="Users" />
               </ListItemButton>
             </Link>
-            
-
-
           </MuiList>
         </Drawer>
         <Box
@@ -302,7 +268,6 @@ export default function AppLayout() {
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
-        //editing from here 
         {/* <Box component="main" sx={{ flexGrow: 1, height: "100vh", overflow: "auto" }}>
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -318,9 +283,8 @@ export default function AppLayout() {
             </Grid>
           </Container>
         </Box> */}
-        //editing detail till here
       </Box>
-    </muiThemeProvider>
+    </ThemeProvider>
   ) : (
     <Navigate to={"/login"} />
   );

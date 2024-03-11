@@ -8,15 +8,12 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { getPosts } from "../../services/posts.service";
 import { useAppContext } from "../../components/AppContext/AppContext";
-import { useDispatch } from "react-redux";
-import { getUsers } from "../../services/posts.service";
+import { getUsers } from "../../services/user.service";
 
 const Users = () => {
   const { setTitle } = useAppContext();
   const [usersData, setUsersData] = useState([]);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     getUsers()
@@ -48,8 +45,8 @@ const Users = () => {
                 Address:
               </Typography>
               <Typography variant="body2">
-                {item.address.street}, {item.address.suite},{" "}
-                {item.address.city}, {item.address.zipcode}
+                {item.address.street}, {item.address.suite}, {item.address.city}
+                , {item.address.zipcode}
               </Typography>
             </CardContent>
             <CardActions>

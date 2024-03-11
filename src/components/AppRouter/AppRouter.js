@@ -24,13 +24,12 @@ const routes = createBrowserRouter([
       },
       {
         path: "album",
-        elememt: <Albums />
+        element: <Albums />,
       },
-      
       {
         path: "albums/:id",
-        elelment: <AlbumDetails />
-      }
+        element: <AlbumDetails />,
+      },
     ],
   },
   {

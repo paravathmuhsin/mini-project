@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Title from "../../components/Title/Title";
 import {
   Button,
@@ -8,22 +8,24 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { getPosts } from "../../services/posts.service";
 import { useAppContext } from "../../components/AppContext/AppContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts } from "../../store/slices/posts.slice";
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
+  const { posts } = useSelector((state) => state.post);
   const { setTitle } = useAppContext();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getPosts().then((res) => {
-      setPosts(res);
-    });
-    // dispatch(getPosts());
+    // getPosts().then((res) => {
+    //   setPosts(res);
+    // });
+    if (!posts.length) {
+      dispatch(fetchPosts());
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [posts]);
 
   useEffect(() => {
     setTitle("Posts");

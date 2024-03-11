@@ -1,49 +1,50 @@
 import React, { useEffect, useState } from "react";
 import Title from "../../components/Title/Title";
+// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
 import {
   Button,
   Card,
   CardActions,
   CardContent,
+  ImageList,
+  ImageListItem,
   Typography,
 } from "@mui/material";
+// eslint-disable-next-line no-unused-vars
 import { Link } from "react-router-dom";
-import { getPosts } from "../../services/posts.service";
+import { getalbums } from "../../services/albums.services";
 import { useAppContext } from "../../components/AppContext/AppContext";
 import { useDispatch } from "react-redux";
 
-const Home = () => {
-  const [posts, setPosts] = useState([]);
+const Albums = () => {
+  const [Albums, setalbums] = useState([]);
   const { setTitle } = useAppContext();
   // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getPosts().then((res) => {
-      setPosts(res);
+    getalbums().then((res) => {
+      setalbums(res);
     });
-    // dispatch(getPosts());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   useEffect(() => {
-    setTitle("Posts");
+    setTitle("Albums");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
-      <Title>Posts</Title>
-      {posts.map((item) => (
+      <Title>Albums</Title>
+      {Albums.map((item) => (
         <Card key={item.id} sx={{ minWidth: 275, mb: 2 }}>
           <CardContent>
             <Typography variant="h5" component="div">
               {item.title}
             </Typography>
-            <Typography variant="body2">{item.body}</Typography>
           </CardContent>
           <CardActions>
             <Button size="small">
-              <Link to={"/post/" + item.id}> Learn More</Link>
+              <Link to={"/albums/" + item.id}> Learn More</Link>
             </Button>
           </CardActions>
         </Card>
@@ -52,4 +53,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Albums;

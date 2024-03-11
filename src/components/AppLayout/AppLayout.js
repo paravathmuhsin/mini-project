@@ -14,6 +14,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import {
   Avatar,
   ListItemButton,
@@ -222,6 +223,14 @@ export default function AppLayout() {
                   <DynamicFeedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Posts" />
+              </ListItemButton>
+            </Link>
+            <Link to={"/album"}>
+              <ListItemButton>
+                <ListItemIcon>
+                  <LibraryBooksIcon />
+                </ListItemIcon>
+                <ListItemText primary="Albums" />
               </ListItemButton>
             </Link>
           </List>

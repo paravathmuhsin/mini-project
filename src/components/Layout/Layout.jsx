@@ -9,17 +9,24 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { Outlet } from "react-router-dom";
+import {
+  Avatar,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Tooltip,
+} from "@mui/material";
+import { Link, Outlet } from "react-router-dom";
 import Copyright from "../Copyright/Copyright";
+import { DynamicFeed, Logout, Settings } from "@mui/icons-material";
+import { useAppContext } from "../AppContext/AppContext";
 
 const drawerWidth = 240;
 
@@ -72,8 +79,21 @@ const defaultTheme = createTheme();
 
 export default function Layout() {
   const [open, setOpen] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const context = useAppContext();
+  console.log(context);
+  const menuOpen = Boolean(anchorEl);
+
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -105,13 +125,68 @@ export default function Layout() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              Dashboard---
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <Tooltip title="Account settings">
+              <IconButton
+                onClick={handleClick}
+                size="small"
+                sx={{ ml: 2 }}
+                aria-controls={menuOpen ? "account-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={menuOpen ? "true" : undefined}
+              >
+                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+              </IconButton>
+            </Tooltip>
+            <Menu
+              anchorEl={anchorEl}
+              id="account-menu"
+              open={menuOpen}
+              onClose={handleClose}
+              onClick={handleClose}
+              PaperProps={{
+                elevation: 0,
+                sx: {
+                  overflow: "visible",
+                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                  mt: 1.5,
+                  "& .MuiAvatar-root": {
+                    width: 32,
+                    height: 32,
+                    ml: -0.5,
+                    mr: 1,
+                  },
+                  "&::before": {
+                    content: '""',
+                    display: "block",
+                    position: "absolute",
+                    top: 0,
+                    right: 14,
+                    width: 10,
+                    height: 10,
+                    bgcolor: "background.paper",
+                    transform: "translateY(-50%) rotate(45deg)",
+                    zIndex: 0,
+                  },
+                },
+              }}
+              transformOrigin={{ horizontal: "right", vertical: "top" }}
+              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+            >
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <Settings fontSize="small" />
+                </ListItemIcon>
+                Settings
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <Logout fontSize="small" />
+                </ListItemIcon>
+                Logout
+              </MenuItem>
+            </Menu>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -129,12 +204,14 @@ export default function Layout() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            <ListItemButton>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItemButton>
+            <Link to="/">
+              <ListItemButton>
+                <ListItemIcon>
+                  <DynamicFeed />
+                </ListItemIcon>
+                <ListItemText primary="Posts" />
+              </ListItemButton>
+            </Link>
           </List>
         </Drawer>
         <Box

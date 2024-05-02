@@ -1,5 +1,6 @@
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 const Login = lazy(() => import("../../pages/Login/Login"));
 const Layout = lazy(() => import("../Layout/Layout"));
@@ -23,7 +24,11 @@ const appRouter = createBrowserRouter([
 ]);
 
 const AppRouter = () => {
-  return <RouterProvider router={appRouter} />;
+  return (
+    <Suspense fallback={<Loader />}>
+      <RouterProvider router={appRouter} />
+    </Suspense>
+  );
 };
 
 export default AppRouter;

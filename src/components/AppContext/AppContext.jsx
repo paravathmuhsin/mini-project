@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
 
 const Context = createContext(null);
@@ -6,8 +6,11 @@ const Context = createContext(null);
 const useAppContext = () => useContext(Context);
 
 const AppContext = ({ children }) => {
+  const [appTitle, setAppTitle] = useState("");
   return (
-    <Context.Provider value={{ name: "test" }}>{children}</Context.Provider>
+    <Context.Provider value={{ appTitle, setAppTitle }}>
+      {children}
+    </Context.Provider>
   );
 };
 

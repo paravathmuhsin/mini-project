@@ -23,7 +23,7 @@ import {
   MenuItem,
   Tooltip,
 } from "@mui/material";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import Copyright from "../Copyright/Copyright";
 import { DynamicFeed, Logout, Settings } from "@mui/icons-material";
 import { useAppContext } from "../AppContext/AppContext";
@@ -80,21 +80,26 @@ const defaultTheme = createTheme();
 export default function Layout() {
   const [open, setOpen] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const context = useAppContext();
-  console.log(context);
+  const nav = useNavigate();
+  const { appTitle } = useAppContext();
   const menuOpen = Boolean(anchorEl);
 
-  const toggleDrawer = () => {
+  const toggleDrawer = React.useCallback(() => {
     setOpen(!open);
-  };
+  }, [open]);
 
-  const handleClick = (event) => {
+  const handleClick = React.useCallback((event) => {
     setAnchorEl(event.currentTarget);
-  };
+  }, []);
 
-  const handleClose = () => {
+  const handleClose = React.useCallback(() => {
     setAnchorEl(null);
-  };
+  }, []);
+
+  const logout = React.useCallback(() => {
+    handleClose();
+    nav("/login");
+  }, [handleClose, nav]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -125,7 +130,7 @@ export default function Layout() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard---
+              {appTitle}
             </Typography>
             <Tooltip title="Account settings">
               <IconButton
@@ -180,7 +185,7 @@ export default function Layout() {
                 </ListItemIcon>
                 Settings
               </MenuItem>
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={logout}>
                 <ListItemIcon>
                   <Logout fontSize="small" />
                 </ListItemIcon>

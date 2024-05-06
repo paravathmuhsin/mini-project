@@ -23,10 +23,11 @@ import {
   MenuItem,
   Tooltip,
 } from "@mui/material";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import Copyright from "../Copyright/Copyright";
 import { DynamicFeed, Logout, Settings } from "@mui/icons-material";
 import { useAppContext } from "../AppContext/AppContext";
+import { useDispatch, useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -80,7 +81,9 @@ const defaultTheme = createTheme();
 export default function Layout() {
   const [open, setOpen] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { isLoggedin, loggedUser } = useSelector((state) => state.login);
   const nav = useNavigate();
+  const dispatch = useDispatch();
   const { appTitle } = useAppContext();
   const menuOpen = Boolean(anchorEl);
 
@@ -98,10 +101,12 @@ export default function Layout() {
 
   const logout = React.useCallback(() => {
     handleClose();
+    localStorage.clear();
+    dispatch({ type: "SET_LOGOUT" });
     nav("/login");
-  }, [handleClose, nav]);
+  }, [dispatch, handleClose, nav]);
 
-  return (
+  return isLoggedin ? (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
@@ -141,7 +146,9 @@ export default function Layout() {
                 aria-haspopup="true"
                 aria-expanded={menuOpen ? "true" : undefined}
               >
-                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                <Avatar sx={{ width: 32, height: 32 }}>
+                  {loggedUser.name[0]}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -245,5 +252,7 @@ export default function Layout() {
         </Box>
       </Box>
     </ThemeProvider>
+  ) : (
+    <Navigate to={"/login"} />
   );
 }

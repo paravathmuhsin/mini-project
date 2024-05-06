@@ -9,7 +9,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyright from "../../components/Copyright/Copyright";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -17,6 +18,8 @@ const defaultTheme = createTheme();
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
+  const { isLoggedin } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
   const nav = useNavigate();
 
   const changeHandler = (e) => {
@@ -26,13 +29,22 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (form.email === "test@gmail.com" && form.password === "12345") {
+      const user = {
+        name: "David",
+        country: "IN",
+      };
+      localStorage.setItem("isLoggedin", true);
+      localStorage.setItem("loggedUser", JSON.stringify(user));
+      dispatch({ type: "SET_LOGIN", payload: user });
       nav("/");
     } else {
       alert("Wrong email or password");
     }
   };
 
-  return (
+  return isLoggedin ? (
+    <Navigate to={"/"} />
+  ) : (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />

@@ -4,7 +4,8 @@ import Loader from "../Loader/Loader";
 
 const Login = lazy(() => import("../../pages/Login/Login"));
 const Layout = lazy(() => import("../Layout/Layout"));
-const Listing = lazy(() => import("../../pages/Post/Listing"));
+const PostListing = lazy(() => import("../../pages/Post/Listing"));
+const PostDetails = lazy(() => import("../../pages/Post/Details"));
 
 const appRouter = createBrowserRouter([
   {
@@ -13,7 +14,11 @@ const appRouter = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Listing />,
+        element: <PostListing />,
+      },
+      {
+        path: "post/:id",
+        element: <PostDetails />,
       },
     ],
   },

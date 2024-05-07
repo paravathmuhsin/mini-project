@@ -11,6 +11,7 @@ import Copyright from "../../components/Copyright/Copyright";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setLogin } from "../../store/actions/login.action";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -33,9 +34,11 @@ export default function Login() {
         name: "David",
         country: "IN",
       };
+      const token = "cbfgw837fg832t3tf32yf93yf9";
       localStorage.setItem("isLoggedin", true);
       localStorage.setItem("loggedUser", JSON.stringify(user));
-      dispatch({ type: "SET_LOGIN", payload: user });
+      localStorage.setItem("authorization", token);
+      dispatch(setLogin(user, token));
       nav("/");
     } else {
       alert("Wrong email or password");

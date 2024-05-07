@@ -28,6 +28,7 @@ import Copyright from "../Copyright/Copyright";
 import { DynamicFeed, Logout, Settings } from "@mui/icons-material";
 import { useAppContext } from "../AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
+import { setLogout } from "../../store/actions/login.action";
 
 const drawerWidth = 240;
 
@@ -102,7 +103,7 @@ export default function Layout() {
   const logout = React.useCallback(() => {
     handleClose();
     localStorage.clear();
-    dispatch({ type: "SET_LOGOUT" });
+    dispatch(setLogout());
     nav("/login");
   }, [dispatch, handleClose, nav]);
 

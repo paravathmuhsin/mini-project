@@ -3,6 +3,7 @@ import { useAppContext } from "../../components/AppContext/AppContext";
 import Title from "../../components/Title/Title";
 import { getPosts } from "../../models/post.model";
 import { Link } from "react-router-dom";
+import { Skeleton } from "@mui/material";
 
 const reducer = (state, action) => {
   if (action.type === "SET_POSTS") {
@@ -27,11 +28,25 @@ const Listing = () => {
   return (
     <>
       <Title>Post Listing</Title>
-      {posts.map((item) => (
-        <Link key={item.id} to={"/post/" + item.id}>
-          <h3>{item.title}</h3>
-        </Link>
-      ))}
+      {posts.length ? (
+        posts.map((item) => (
+          <Link key={item.id} to={"/post/" + item.id}>
+            <h3>{item.title}</h3>
+          </Link>
+        ))
+      ) : (
+        <>
+          <Skeleton variant="text" sx={{ fontSize: "2rem" }} />
+          <Skeleton variant="text" sx={{ fontSize: "2rem" }} />
+          <Skeleton variant="text" sx={{ fontSize: "2rem" }} />
+          <Skeleton variant="text" sx={{ fontSize: "2rem" }} />
+          <Skeleton variant="text" sx={{ fontSize: "2rem" }} />
+          <Skeleton variant="text" sx={{ fontSize: "2rem" }} />
+          <Skeleton variant="text" sx={{ fontSize: "2rem" }} />
+          <Skeleton variant="text" sx={{ fontSize: "2rem" }} />
+          <Skeleton variant="text" sx={{ fontSize: "2rem" }} />
+        </>
+      )}
     </>
   );
 };

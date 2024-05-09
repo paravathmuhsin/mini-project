@@ -8,22 +8,46 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyright from "../../components/Copyright/Copyright";
+import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setLogin } from "../../store/actions/login.action";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const [form, setForm] = useState({ email: "", password: "" });
+  const { isLoggedin } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
+  const nav = useNavigate();
+
+  const changeHandler = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  return (
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (form.email === "test@gmail.com" && form.password === "12345") {
+      const user = {
+        name: "David",
+        country: "IN",
+      };
+      const token = "cbfgw837fg832t3tf32yf93yf9";
+      localStorage.setItem("isLoggedin", true);
+      localStorage.setItem("loggedUser", JSON.stringify(user));
+      localStorage.setItem("authorization", token);
+      dispatch(setLogin(user, token));
+      nav("/");
+    } else {
+      alert("Wrong email or password");
+    }
+  };
+
+  return isLoggedin ? (
+    <Navigate to={"/"} />
+  ) : (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -55,6 +79,8 @@ export default function Login() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              value={form.email}
+              onChange={changeHandler}
               autoFocus
             />
             <TextField
@@ -65,6 +91,8 @@ export default function Login() {
               label="Password"
               type="password"
               id="password"
+              value={form.password}
+              onChange={changeHandler}
               autoComplete="current-password"
             />
             <Button

@@ -14,6 +14,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import CommentIcon from '@mui/icons-material/Comment';
 import {
   Avatar,
   ListItemButton,
@@ -223,6 +224,12 @@ export default function Layout() {
                   <DynamicFeed />
                 </ListItemIcon>
                 <ListItemText primary="Posts" />
+              </ListItemButton>
+              <ListItemButton>
+                <ListItemIcon>
+                  <CommentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Comments" />
               </ListItemButton>
             </Link>
           </List>

@@ -40,7 +40,6 @@ const Details = () => {
 
 export default Details;
 
-
 /* import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getComment } from "../../models/comment.model";

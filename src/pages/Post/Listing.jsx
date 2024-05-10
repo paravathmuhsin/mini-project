@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Skeleton } from "@mui/material";
 
 const reducer = (state, action) => {
-  if (action.type === "SET_POSTS") {
+  if (action.type === "SET_POSTS") {    
     return action.payload;
   }
   return state;

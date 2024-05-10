@@ -8,6 +8,8 @@ const PostListing = lazy(() => import("../../pages/Post/Listing"));
 const PostDetails = lazy(() => import("../../pages/Post/Details"));
 const AlbumListing = lazy(() => import("../../pages/album/Albumlisting"));
 const AlbumDetails = lazy(() => import("../../pages/album/Albumdetails"));
+const TodoListing = lazy(() => import("../../pages/Todos/TodoListing"));
+const TodoDetails = lazy(() => import("../../pages/Todos/TodoDetails"));
 
 const appRouter = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const appRouter = createBrowserRouter([
       {
         path: "album/:id",
         element: <AlbumDetails />,
+      },
+      {
+        path: "todos",
+        element: <TodoListing />,
+      },
+      {
+        path: "todos/:id",
+        element: <TodoDetails />,
       },
     ],
   },

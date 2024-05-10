@@ -225,6 +225,14 @@ export default function Layout() {
                 <ListItemText primary="Posts" />
               </ListItemButton>
             </Link>
+            <Link to="/todos">
+              <ListItemButton>
+                <ListItemIcon>
+                  <DynamicFeed />
+                </ListItemIcon>
+                <ListItemText primary="Todos" />
+              </ListItemButton>
+            </Link>
           </List>
         </Drawer>
         <Box

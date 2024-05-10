@@ -7,6 +7,7 @@ import { Skeleton } from "@mui/material";
 
 const reducer = (state, action) => {
   if (action.type === "SET_POSTS") {
+    console.log('action.payload',action.payload);
     return action.payload;
   }
   return state;

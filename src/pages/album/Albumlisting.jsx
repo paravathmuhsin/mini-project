@@ -1,36 +1,36 @@
 import { useEffect, useReducer } from "react";
 import { useAppContext } from "../../components/AppContext/AppContext";
 import Title from "../../components/Title/Title";
-import { getPosts } from "../../models/post.model";
+import { getAlbums } from "../../models/album.model";
 import { Link } from "react-router-dom";
 import { Skeleton } from "@mui/material";
 
 const reducer = (state, action) => {
-  if (action.type === "SET_POSTS") {    
+  if (action.type === "SET_ALBUM") {
     return action.payload;
   }
   return state;
 };
 
-const Listing = () => {
+const Albumlisting = () => {
   const { setAppTitle } = useAppContext();
-  const [posts, dispatch] = useReducer(reducer, []);
+  const [albums, dispatch] = useReducer(reducer, []);
 
   useEffect(() => {
-    setAppTitle("Post Listing");
+    setAppTitle("Album Listing");
   }, [setAppTitle]);
 
   useEffect(() => {
-    getPosts().then((res) => {
-      dispatch({ type: "SET_POSTS", payload: res });
+    getAlbums().then((result) => {
+      dispatch({ type: "SET_ALBUM", payload: result });
     });
   }, []);
   return (
     <>
-      <Title>Post Listing</Title>
-      {posts.length ? (
-        posts.map((item) => (
-          <Link key={item.id} to={"/post/" + item.id}>
+      <Title>Album Listing</Title>
+      {albums.length ? (
+        albums.map((item) => (
+          <Link key={item.id} to={"/album/" + item.id}>
             <h3>{item.title}</h3>
           </Link>
         ))
@@ -51,4 +51,4 @@ const Listing = () => {
   );
 };
 
-export default Listing;
+export default Albumlisting;

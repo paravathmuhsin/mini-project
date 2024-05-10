@@ -14,7 +14,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import CommentIcon from '@mui/icons-material/Comment';
+import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
+import CommentIcon from "@mui/icons-material/Comment";
 import {
   Avatar,
   ListItemButton,
@@ -225,6 +226,24 @@ export default function Layout() {
                 </ListItemIcon>
                 <ListItemText primary="Posts" />
               </ListItemButton>
+            </Link>
+            <Link to="/album">
+              <ListItemButton>
+                <ListItemIcon>
+                  <CollectionsBookmarkIcon />
+                </ListItemIcon>
+                <ListItemText primary="Album" />
+              </ListItemButton>
+            </Link>
+            <Link to="/todos">
+              <ListItemButton>
+                <ListItemIcon>
+                  <DynamicFeed />
+                </ListItemIcon>
+                <ListItemText primary="Todos" />
+              </ListItemButton>
+            </Link>
+            <Link to="/comment">
               <ListItemButton>
                 <ListItemIcon>
                   <CommentIcon />

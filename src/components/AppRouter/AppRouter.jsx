@@ -10,6 +10,8 @@ const AlbumListing = lazy(() => import("../../pages/album/Albumlisting"));
 const AlbumDetails = lazy(() => import("../../pages/album/Albumdetails"));
 const TodoListing = lazy(() => import("../../pages/Todos/TodoListing"));
 const TodoDetails = lazy(() => import("../../pages/Todos/TodoDetails"));
+const CommentListing = lazy(() => import("../../pages/Comment/Listing"));
+const CommentDetails = lazy(() => import("../../pages/Comment/Details"));
 
 const appRouter = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ const appRouter = createBrowserRouter([
       {
         path: "todos/:id",
         element: <TodoDetails />,
+      },
+      {
+        path: "comment",
+        element: <CommentListing />,
+      },
+      {
+        path: "comment/:id",
+        element: <CommentDetails />,
       },
     ],
   },

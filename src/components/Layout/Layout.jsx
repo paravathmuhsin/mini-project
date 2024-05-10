@@ -14,7 +14,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
+import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
+import CommentIcon from "@mui/icons-material/Comment";
 import {
   Avatar,
   ListItemButton,
@@ -26,7 +27,7 @@ import {
 } from "@mui/material";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import Copyright from "../Copyright/Copyright";
-import { DynamicFeed, Logout, Settings} from "@mui/icons-material";
+import { DynamicFeed, Logout, Settings } from "@mui/icons-material";
 import { useAppContext } from "../AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../../store/actions/login.action";
@@ -225,14 +226,14 @@ export default function Layout() {
                 </ListItemIcon>
                 <ListItemText primary="Posts" />
               </ListItemButton>
-              <Link to="/album">
+            </Link>
+            <Link to="/album">
               <ListItemButton>
-              <ListItemIcon>
-              <CollectionsBookmarkIcon />
-                  </ListItemIcon>
+                <ListItemIcon>
+                  <CollectionsBookmarkIcon />
+                </ListItemIcon>
                 <ListItemText primary="Album" />
               </ListItemButton>
-            </Link>
             </Link>
             <Link to="/todos">
               <ListItemButton>
@@ -240,6 +241,14 @@ export default function Layout() {
                   <DynamicFeed />
                 </ListItemIcon>
                 <ListItemText primary="Todos" />
+              </ListItemButton>
+            </Link>
+            <Link to="/comment">
+              <ListItemButton>
+                <ListItemIcon>
+                  <CommentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Comments" />
               </ListItemButton>
             </Link>
           </List>

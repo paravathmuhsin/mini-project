@@ -14,10 +14,13 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import AccessibilityIcon from "@mui/icons-material/CollectionsBookmark";
+
+
 import {
   Avatar,
   ListItemButton,
-  ListItemIcon,
+  ListItemIcon,   
   ListItemText,
   Menu,
   MenuItem,
@@ -220,11 +223,20 @@ export default function Layout() {
             <Link to="/">
               <ListItemButton>
                 <ListItemIcon>
-                  <DynamicFeed />
+                <DynamicFeed />
                 </ListItemIcon>
-                <ListItemText primary="Posts" />
+                <ListItemText primary="Post" />
               </ListItemButton>
             </Link>
+            <Link to="./users">
+              <ListItemButton>
+                <ListItemIcon>
+                <AccessibilityIcon />
+                </ListItemIcon>
+                <ListItemText primary="Users" />
+              </ListItemButton>
+            </Link>
+           
           </List>
         </Drawer>
         <Box

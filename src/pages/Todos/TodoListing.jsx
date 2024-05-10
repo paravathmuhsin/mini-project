@@ -7,7 +7,6 @@ import { getTodos } from "../../models/todos.model";
 
 const reducer = (state, action) => {
     if (action.type === "SET_TODOS") {
-        console.log('action.payload',action.payload);
       return action.payload;
     }
     return state;

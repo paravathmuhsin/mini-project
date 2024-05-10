@@ -12,6 +12,7 @@ const TodoListing = lazy(() => import("../../pages/Todos/TodoListing"));
 const TodoDetails = lazy(() => import("../../pages/Todos/TodoDetails"));
 const CommentListing = lazy(() => import("../../pages/Comment/Listing"));
 const CommentDetails = lazy(() => import("../../pages/Comment/Details"));
+const PhotosListing = lazy(() => import("../../pages/Photos/Listing"));
 
 const appRouter = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const appRouter = createBrowserRouter([
       {
         path: "comment/:id",
         element: <CommentDetails />,
+      },
+      {
+        path: "photos",
+        element: <PhotosListing />,
       },
     ],
   },

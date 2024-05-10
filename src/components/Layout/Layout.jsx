@@ -251,6 +251,14 @@ export default function Layout() {
                 <ListItemText primary="Comments" />
               </ListItemButton>
             </Link>
+            <Link to="/photos">
+              <ListItemButton>
+                <ListItemIcon>
+                  <DynamicFeed />
+                </ListItemIcon>
+                <ListItemText primary="Photos" />
+              </ListItemButton>
+            </Link>
           </List>
         </Drawer>
         <Box

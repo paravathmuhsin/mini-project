@@ -225,6 +225,8 @@ export default function Layout() {
                 </ListItemIcon>
                 <ListItemText primary="Posts" />
               </ListItemButton>
+              </Link>
+              <Link to="/comment">
               <ListItemButton>
                 <ListItemIcon>
                   <CommentIcon />

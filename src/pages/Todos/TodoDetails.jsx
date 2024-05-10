@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getTodo } from "../../models/post.model";
 import Title from "../../components/Title/Title";
 import { useAppContext } from "../../components/AppContext/AppContext";
 import { Skeleton } from "@mui/material";
+import { getTodo } from "../../models/todos.model";
 
 const TodoDetails = () =>{
     const { id } = useParams();

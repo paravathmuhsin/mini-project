@@ -31,11 +31,11 @@ const Listing = () => {
             <Title>Todo Listing</Title>
             {
                 todos.length ? (
-                    todos.map((item) => {
-                        <Link key={item.id} to={"/todos" + item.id}>
+                    todos.map((item) => (
+                        <Link key={item.id} to={"/todos/" + item.id}>
                             <h3>{item.title}</h3>
                         </Link>
-                    })
+                    ))
                 ) : (
                     <>
                         <Skeleton variant="text" sx={{ fontSize: "2rem" }} />

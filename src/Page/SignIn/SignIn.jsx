@@ -1,13 +1,8 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
 import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Divider from "@mui/material/Divider";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
-import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
@@ -15,6 +10,7 @@ import MuiCard from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import AppTheme from "../../Components/AppTheme/AppTheme";
 import ColorModeSelect from "../../Components/AppTheme/ColorModeSelect";
+import { useState } from "react";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -59,29 +55,21 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignIn(props) {
-  const [emailError, setEmailError] = React.useState(false);
-  const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
-  const [passwordError, setPasswordError] = React.useState(false);
-  const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     if (emailError || passwordError) {
-      event.preventDefault();
       return;
     }
-    const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+      email: email,
+      password: password,
     });
   };
 
@@ -110,6 +98,14 @@ export default function SignIn(props) {
     }
 
     return isValid;
+  };
+
+  const changeHandler = (e) => {
+    if (e.target.name === "email") {
+      setEmail(e.target.value);
+    } else {
+      setPassword(e.target.value);
+    }
   };
 
   return (
@@ -142,6 +138,7 @@ export default function SignIn(props) {
             <FormControl>
               <FormLabel htmlFor="email">Email</FormLabel>
               <TextField
+                value={email}
                 error={emailError}
                 helperText={emailErrorMessage}
                 id="email"
@@ -154,11 +151,13 @@ export default function SignIn(props) {
                 fullWidth
                 variant="outlined"
                 color={emailError ? "error" : "primary"}
+                onChange={changeHandler}
               />
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="password">Password</FormLabel>
               <TextField
+                value={password}
                 error={passwordError}
                 helperText={passwordErrorMessage}
                 name="password"
@@ -171,6 +170,7 @@ export default function SignIn(props) {
                 fullWidth
                 variant="outlined"
                 color={passwordError ? "error" : "primary"}
+                onChange={changeHandler}
               />
             </FormControl>
             <Button

@@ -11,6 +11,7 @@ import { styled } from "@mui/material/styles";
 import AppTheme from "../../Components/AppTheme/AppTheme";
 import ColorModeSelect from "../../Components/AppTheme/ColorModeSelect";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -55,8 +56,10 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignIn(props) {
+  const nav = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordError, setPasswordError] = useState(false);
@@ -64,22 +67,24 @@ export default function SignIn(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (emailError || passwordError) {
+    if (!validateInputs()) {
       return;
     }
-    console.log({
-      email: email,
-      password: password,
-    });
+{
+  type: 'SET_LOGIN'
+}
+    // login check api call
+    if (email === "test@gmail.com" && password === "123456") {
+      nav("/");
+    } else {
+      alert("Invalid credentials");
+    }
   };
 
   const validateInputs = () => {
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
-
     let isValid = true;
 
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
       setEmailError(true);
       setEmailErrorMessage("Please enter a valid email address.");
       isValid = false;
@@ -88,7 +93,7 @@ export default function SignIn(props) {
       setEmailErrorMessage("");
     }
 
-    if (!password.value || password.value.length < 6) {
+    if (!password || password.length < 6) {
       setPasswordError(true);
       setPasswordErrorMessage("Password must be at least 6 characters long.");
       isValid = false;
@@ -138,7 +143,6 @@ export default function SignIn(props) {
             <FormControl>
               <FormLabel htmlFor="email">Email</FormLabel>
               <TextField
-                value={email}
                 error={emailError}
                 helperText={emailErrorMessage}
                 id="email"
@@ -151,13 +155,13 @@ export default function SignIn(props) {
                 fullWidth
                 variant="outlined"
                 color={emailError ? "error" : "primary"}
+                value={email}
                 onChange={changeHandler}
               />
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="password">Password</FormLabel>
               <TextField
-                value={password}
                 error={passwordError}
                 helperText={passwordErrorMessage}
                 name="password"
@@ -170,15 +174,11 @@ export default function SignIn(props) {
                 fullWidth
                 variant="outlined"
                 color={passwordError ? "error" : "primary"}
+                value={password}
                 onChange={changeHandler}
               />
             </FormControl>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              onClick={validateInputs}
-            >
+            <Button type="submit" fullWidth variant="contained">
               Sign in
             </Button>
           </Box>

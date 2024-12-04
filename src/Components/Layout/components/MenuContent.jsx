@@ -7,15 +7,21 @@ import Stack from "@mui/material/Stack";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import { useNavigate } from "react-router-dom";
 
 const mainListItems = [{ text: "Home", icon: <HomeRoundedIcon /> }];
 
-const secondaryListItems = [
-  { text: "Settings", icon: <SettingsRoundedIcon /> },
-  { text: "Logout", icon: <LogoutRoundedIcon /> },
-];
-
 export default function MenuContent() {
+  const nav = useNavigate();
+  const logout = () => {
+    nav("/sign-in");
+  };
+
+  const secondaryListItems = [
+    { text: "Settings", icon: <SettingsRoundedIcon /> },
+    { text: "Logout", icon: <LogoutRoundedIcon />, click: logout },
+  ];
+
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
       <List dense>
@@ -31,7 +37,12 @@ export default function MenuContent() {
 
       <List dense>
         {secondaryListItems.map((item, index) => (
-          <ListItem key={index} disablePadding sx={{ display: "block" }}>
+          <ListItem
+            key={index}
+            onClick={item.click}
+            disablePadding
+            sx={{ display: "block" }}
+          >
             <ListItemButton>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />

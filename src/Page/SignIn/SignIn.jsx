@@ -70,9 +70,7 @@ export default function SignIn(props) {
     if (!validateInputs()) {
       return;
     }
-{
-  type: 'SET_LOGIN'
-}
+
     // login check api call
     if (email === "test@gmail.com" && password === "123456") {
       nav("/");

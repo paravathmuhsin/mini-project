@@ -12,6 +12,8 @@ import AppTheme from "../../Components/AppTheme/AppTheme";
 import ColorModeSelect from "../../Components/AppTheme/ColorModeSelect";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setLogin } from "../../Store/actions/login.action";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -56,6 +58,9 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignIn(props) {
+  const reduxState = useSelector((state) => state.login);
+  const dispatch = useDispatch();
+  console.log(reduxState);
   const nav = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -73,6 +78,12 @@ export default function SignIn(props) {
 
     // login check api call
     if (email === "test@gmail.com" && password === "123456") {
+      const loggedUser = {
+        name: "David",
+        country: "India",
+        email: "test@gmail.com",
+      };
+      dispatch(setLogin(loggedUser));
       nav("/");
     } else {
       alert("Invalid credentials");

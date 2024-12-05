@@ -8,12 +8,16 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLogout } from "../../../Store/actions/login.action";
 
 const mainListItems = [{ text: "Home", icon: <HomeRoundedIcon /> }];
 
 export default function MenuContent() {
   const nav = useNavigate();
+  const dispatch = useDispatch();
   const logout = () => {
+    dispatch(setLogout());
     nav("/sign-in");
   };
 

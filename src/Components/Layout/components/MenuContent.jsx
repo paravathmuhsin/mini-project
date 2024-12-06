@@ -11,16 +11,24 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../../Store/actions/login.action";
 
-const mainListItems = [{ text: "Home", icon: <HomeRoundedIcon /> }];
-
 export default function MenuContent() {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const logout = () => {
+    localStorage.clear();
     dispatch(setLogout());
     nav("/sign-in");
   };
 
+  const mainListItems = [
+    {
+      text: "Home",
+      icon: <HomeRoundedIcon />,
+      click: () => {
+        nav("/");
+      },
+    },
+  ];
   const secondaryListItems = [
     { text: "Settings", icon: <SettingsRoundedIcon /> },
     { text: "Logout", icon: <LogoutRoundedIcon />, click: logout },
@@ -30,7 +38,12 @@ export default function MenuContent() {
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
       <List dense>
         {mainListItems.map((item, index) => (
-          <ListItem key={index} disablePadding sx={{ display: "block" }}>
+          <ListItem
+            key={index}
+            onClick={item.click}
+            disablePadding
+            sx={{ display: "block" }}
+          >
             <ListItemButton selected={index === 0}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />

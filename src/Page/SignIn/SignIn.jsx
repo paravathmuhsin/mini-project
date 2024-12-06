@@ -11,7 +11,7 @@ import { styled } from "@mui/material/styles";
 import AppTheme from "../../Components/AppTheme/AppTheme";
 import ColorModeSelect from "../../Components/AppTheme/ColorModeSelect";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogin } from "../../Store/actions/login.action";
 
@@ -58,9 +58,8 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignIn(props) {
-  const reduxState = useSelector((state) => state.login);
+  const { isLoggedIn } = useSelector((state) => state.login);
   const dispatch = useDispatch();
-  console.log(reduxState);
   const nav = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -83,6 +82,8 @@ export default function SignIn(props) {
         country: "India",
         email: "test@gmail.com",
       };
+      localStorage.setItem("isLoggedIn", true);
+      localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
       dispatch(setLogin(loggedUser));
       nav("/");
     } else {
@@ -122,7 +123,9 @@ export default function SignIn(props) {
     }
   };
 
-  return (
+  return isLoggedIn ? (
+    <Navigate to="/" />
+  ) : (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">

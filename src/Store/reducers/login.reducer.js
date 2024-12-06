@@ -1,8 +1,8 @@
 import { SET_LOGIN, SET_LOGOUT } from "../types/login.type";
 
 const initialValue = {
-  isLoggedIn: false,
-  loggedUser: null,
+  isLoggedIn: Boolean(localStorage.getItem("isLoggedIn")),
+  loggedUser: JSON.parse(localStorage.getItem("loggedUser")),
 };
 
 const loginReducer = (state = initialValue, action) => {

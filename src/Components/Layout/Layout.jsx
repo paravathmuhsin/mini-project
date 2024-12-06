@@ -6,10 +6,12 @@ import Header from "./components/Header";
 import MainGrid from "./components/MainGrid";
 import SideMenu from "./components/SideMenu";
 import AppTheme from "../AppTheme/AppTheme";
-
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 export default function Layout(props) {
-  return (
+  const { isLoggedIn } = useSelector((state) => state.login);
+  return isLoggedIn ? (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: "flex" }}>
@@ -40,5 +42,7 @@ export default function Layout(props) {
         </Box>
       </Box>
     </AppTheme>
+  ) : (
+    <Navigate to="/sign-in" />
   );
 }

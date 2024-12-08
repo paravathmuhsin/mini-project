@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import Comments from "../../Page/Comments/Comments";
+import CommentsDetail from "../../Page/Comments/CommentsDetail";
 
 const SignIn = lazy(() => import("../../Page/SignIn/SignIn"));
 const Layout = lazy(() => import("../Layout/Layout"));
@@ -18,6 +20,14 @@ const routers = createBrowserRouter([
       {
         path: "post/:id",
         element: <PostDetail />,
+      },
+      {
+        path: "/comments",
+        element: <Comments />,
+      },
+      {
+        path: "/comments/:id",
+        element: <CommentsDetail />,
       },
     ],
   },

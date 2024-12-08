@@ -10,6 +10,7 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../../Store/actions/login.action";
+import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
 
 export default function MenuContent() {
   const nav = useNavigate();
@@ -26,6 +27,13 @@ export default function MenuContent() {
       icon: <HomeRoundedIcon />,
       click: () => {
         nav("/");
+      },
+    },
+    {
+      text: "Comments",
+      icon: <ChatBubbleRoundedIcon />,
+      click: () => {
+        nav("/comments");
       },
     },
   ];

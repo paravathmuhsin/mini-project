@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import Comments from "../../Page/Comments/Comments";
-import CommentsDetail from "../../Page/Comments/CommentsDetail";
+
 
 const SignIn = lazy(() => import("../../Page/SignIn/SignIn"));
 const Layout = lazy(() => import("../Layout/Layout"));
 const Posts = lazy(() => import("../../Page/Post/Posts"));
 const PostDetail = lazy(() => import("../../Page/Post/PostDetail"));
+const Comments = lazy(() => import("../../Page/Comments/Comments"))
+const CommentsDetail = lazy(() => import("../../Page/Comments/CommentsDetail"));
 
 const routers = createBrowserRouter([
   {

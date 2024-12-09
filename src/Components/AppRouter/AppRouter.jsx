@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, Suspense } from "react";
+const User = lazy(() => import("../../Page/Users/User"));
+const UserDetails = lazy(() => import("../../Page/Users/UserDetails"));
 
 const SignIn = lazy(() => import("../../Page/SignIn/SignIn"));
 const Layout = lazy(() => import("../Layout/Layout"));
@@ -34,6 +36,14 @@ const routers = createBrowserRouter([
       {
         path: "todo",
         element: <TodoList />,
+      },
+      {
+        path: "/users",
+        element: <User />,
+      },
+      {
+        path: "users/:id",
+        element: <UserDetails />,
       },
     ],
   },

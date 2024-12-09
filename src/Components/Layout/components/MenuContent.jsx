@@ -7,12 +7,13 @@ import Stack from "@mui/material/Stack";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../../Store/actions/login.action";
-import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
+import ChatBubbleRoundedIcon from "@mui/icons-material/ChatBubbleRounded";
 import { useState } from "react";
-import TaskRoundedIcon from '@mui/icons-material/TaskRounded';
+import TaskRoundedIcon from "@mui/icons-material/TaskRounded";
 
 export default function MenuContent() {
   const nav = useNavigate();
@@ -27,7 +28,7 @@ export default function MenuContent() {
   const mainListItems = [
     {
       text: "Home",
-      icon: <HomeRoundedIcon/>,
+      icon: <HomeRoundedIcon />,
       click: () => {
         nav("/");
         setIndexx(0);
@@ -40,17 +41,21 @@ export default function MenuContent() {
         nav("/comments");
       },
     },
-
     {
       text: "Tasks",
-      icon: <TaskRoundedIcon  />,
+      icon: <TaskRoundedIcon />,
       click: () => {
         nav("/todo");
         setIndexx(1);
       },
     },
-
-
+    {
+      text: "Users Details",
+      icon: <PersonIcon />,
+      click: () => {
+        nav("/users");
+      },
+    },
   ];
   const secondaryListItems = [
     { text: "Settings", icon: <SettingsRoundedIcon /> },

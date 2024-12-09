@@ -7,6 +7,7 @@ import Stack from "@mui/material/Stack";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../../Store/actions/login.action";
@@ -26,6 +27,13 @@ export default function MenuContent() {
       icon: <HomeRoundedIcon />,
       click: () => {
         nav("/");
+      },
+    },
+    {
+      text: "Users Details",
+      icon: <PersonIcon />,
+      click: () => {
+        nav("/users");
       },
     },
   ];

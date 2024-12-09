@@ -1,17 +1,25 @@
-
 import axios from "../../Utils/axios";
 import { useState, useEffect } from "react";
-import { Card, CardContent, Typography, Grid, Checkbox, Box, CircularProgress } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Grid,
+  Checkbox,
+  Box,
+  CircularProgress,
+} from "@mui/material";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-       axios
+    axios
       .get("todos")
+      .then((res) => res.data)
       .then((res) => {
-        setTodos(res.data);
+        setTodos(res);
         setLoading(false);
       })
       .catch((err) => {
@@ -19,16 +27,22 @@ const TodoList = () => {
         setLoading(false);
       });
   }, []);
- 
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '90vh', width: '100%' }}>
-        <CircularProgress  size="5rem"  />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "90vh",
+          width: "100%",
+        }}
+      >
+        <CircularProgress size="5rem" />
       </Box>
-    );  
+    );
   }
-
 
   return (
     <Box sx={{ padding: 4 }}>

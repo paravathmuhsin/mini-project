@@ -2,9 +2,20 @@ import { useEffect, useState } from "react";
 import { getUsers } from "../../Services/post.service";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import useAppContext from "../../Components/AppContext/useAppContext";
+import { USERS } from "../../Utils/menuConstants";
 
 const User = () => {
+  const { setContext } = useAppContext();
   const [users, setUsers] = useState([]);
+  useEffect(() => {
+    setContext({
+      appTitle: "Users",
+      breadcrumbs: [{ label: USERS }],
+      activeMenu: USERS,
+    });
+  });
+
   useEffect(() => {
     getUsers().then((res) => {
       setUsers(res);

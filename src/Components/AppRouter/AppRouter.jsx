@@ -38,7 +38,7 @@ const routers = createBrowserRouter([
         element: <TodoList />,
       },
       {
-        path: "/users",
+        path: "users",
         element: <User />,
       },
       {

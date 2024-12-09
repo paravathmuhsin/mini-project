@@ -8,7 +8,9 @@ import {
   Checkbox,
   Box,
   CircularProgress,
+  CardActions,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -67,6 +69,9 @@ const TodoList = () => {
                   </Typography>
                 </Box>
               </CardContent>
+              <CardActions>
+                <Link to={"/todo/" + item.id}>View user details</Link>
+              </CardActions>
             </Card>
           </Grid>
         ))}

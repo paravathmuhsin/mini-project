@@ -11,7 +11,6 @@ const UserDetails = () => {
       setUser(res);
     });
   }, [id]);
-  console.log(user);
   return (
     <div>
       {user && (

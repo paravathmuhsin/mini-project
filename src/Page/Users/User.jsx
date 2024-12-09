@@ -10,7 +10,6 @@ const User = () => {
       setUsers(res);
     }, []);
   });
-  console.log(users);
   return (
     <div>
       {users.map((item) => (

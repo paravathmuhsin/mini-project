@@ -11,10 +11,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../../Store/actions/login.action";
 import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
+import { useState } from "react";
+import TaskRoundedIcon from '@mui/icons-material/TaskRounded';
 
 export default function MenuContent() {
   const nav = useNavigate();
   const dispatch = useDispatch();
+  const [indexx, setIndexx] = useState(0);
   const logout = () => {
     localStorage.clear();
     dispatch(setLogout());
@@ -24,9 +27,10 @@ export default function MenuContent() {
   const mainListItems = [
     {
       text: "Home",
-      icon: <HomeRoundedIcon />,
+      icon: <HomeRoundedIcon/>,
       click: () => {
         nav("/");
+        setIndexx(0);
       },
     },
     {
@@ -36,6 +40,17 @@ export default function MenuContent() {
         nav("/comments");
       },
     },
+
+    {
+      text: "Tasks",
+      icon: <TaskRoundedIcon  />,
+      click: () => {
+        nav("/todo");
+        setIndexx(1);
+      },
+    },
+
+
   ];
   const secondaryListItems = [
     { text: "Settings", icon: <SettingsRoundedIcon /> },
@@ -52,7 +67,7 @@ export default function MenuContent() {
             disablePadding
             sx={{ display: "block" }}
           >
-            <ListItemButton selected={index === 0}>
+            <ListItemButton selected={index === indexx}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>

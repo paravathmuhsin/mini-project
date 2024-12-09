@@ -1,82 +1,76 @@
-import axios from "../../Utils/axios";
-import { useState, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Grid,
-  Checkbox,
-  Box,
-  CircularProgress,
-  CardActions,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {   useParams } from "react-router-dom";
+import { Box, Card, CardContent, Checkbox, CircularProgress, Typography } from "@mui/material";
+import { getTodo } from "../../Services/todos.service";
+import axios from "axios";
+import useAppContext from "../../Components/AppContext/useAppContext";
+import { TASKS } from "../../Utils/menuConstants";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState([]);
+  const { id } = useParams();
+  const [todo, setTodos] = useState(null);
   const [loading, setLoading] = useState(true);
+  const {setContext} =useAppContext()
 
+  useEffect(()=>{
+    setContext({ appTitle: 'Task List', breadcrumbs:[{label : TASKS,  link :  "/todos"},{label: "Task List"}], activeMenu: TASKS})
+  },[]);
+
+
+  
   useEffect(() => {
     axios
-      .get("todos")
-      .then((res) => res.data)
-      .then((res) => {
-        setTodos(res);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching todos:", err);
-        setLoading(false);
-      });
-  }, []);
+   .get("todos")
+   .then(( res) => {
+     setTodos(res.data);
+     setLoading(false);
+   })
+   .catch((err) => {
+     console.error("Error fetching todos:", err);
+     setLoading(false);
+   });
+}, []);
+
+
+
+  useEffect(() => {
+    getTodo(id).then((res) => {
+      setTodos(res);
+    });
+  }, [id]);
+
 
   if (loading) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "90vh",
-          width: "100%",
-        }}
-      >
-        <CircularProgress size="5rem" />
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '90vh', width: '100%' }}>
+        <CircularProgress  size="5rem"  />
       </Box>
-    );
+    );  
   }
 
+
   return (
-    <Box sx={{ padding: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        Todo List
-      </Typography>
-      <Grid container spacing={4}>
-        {todos.map((item) => (
-          <Grid item xs={12} sm={6} md={4} key={item.id}>
-            <Card variant="outlined" sx={{ height: "100%" }}>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  {item.title}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" gutterBottom>
-                  Task No : {item.id}
-                </Typography>
-                <Box display="flex" alignItems="center">
-                  <Checkbox checked={item.completed} disabled />
+    <div>
+      {todo && (
+        <Card sx={{ minWidth: 275 }}>
+          <CardContent>
+            <Typography
+              gutterBottom
+              sx={{ color: "text.secondary", fontSize: 14 }}
+            >
+              {todo.title}
+              
+            </Typography>
+            <Box display="flex" alignItems="center">
+                  <Checkbox checked={todo.completed} disabled />
                   <Typography variant="body1">
-                    {item.completed ? "Completed" : "Incomplete"}
+                    {todo.completed ? "Completed" : "Incomplete"}
                   </Typography>
                 </Box>
-              </CardContent>
-              <CardActions>
-                <Link to={"/todo/" + item.id}>View user details</Link>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+          </CardContent>
+        </Card>
+      )}
+    </div>
   );
 };
 

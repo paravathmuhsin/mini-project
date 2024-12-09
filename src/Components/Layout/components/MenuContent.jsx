@@ -48,7 +48,7 @@ export default function MenuContent() {
       text: TASKS,
       icon: <TaskRoundedIcon />,
       click: () => {
-        nav("/todo");
+        nav("/todos");
       },
     },
     {

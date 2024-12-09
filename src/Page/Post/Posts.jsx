@@ -2,9 +2,20 @@ import { useEffect, useState } from "react";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { getPosts } from "../../Services/post.service";
+import useAppContext from "../../Components/AppContext/useAppContext";
+import { HOME } from "../../Utils/menuConstants";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
+  const { setContext } = useAppContext();
+
+  useEffect(() => {
+    setContext({
+      appTitle: "Posts",
+      breadcrumbs: [{ label: HOME }],
+      activeMenu: HOME,
+    });
+  }, []);
   useEffect(() => {
     getPosts().then((res) => {
       setPosts(res);

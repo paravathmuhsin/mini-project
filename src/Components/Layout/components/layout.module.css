@@ -1,0 +1,4 @@
+.breadcrumbLink {
+  color: var(--template-palette-text-secondary);
+  text-decoration: none;
+}

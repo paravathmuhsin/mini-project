@@ -14,13 +14,13 @@ const User = () => {
       breadcrumbs: [{ label: USERS }],
       activeMenu: USERS,
     });
-  });
+  }, []);
 
   useEffect(() => {
     getUsers().then((res) => {
       setUsers(res);
-    }, []);
-  });
+    });
+  }, []);
   return (
     <div>
       {users.map((item) => (

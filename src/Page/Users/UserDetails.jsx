@@ -30,7 +30,7 @@ const UserDetails = () => {
       ],
       activeMenu: USERS,
     });
-  });
+  }, []);
 
   useEffect(() => {
     getUser(id).then((res) => {
@@ -88,7 +88,7 @@ const UserDetails = () => {
       )} */}
 
       {user && (
-        <Grid container spacing={4} padding={10} wrap="1">
+        <Grid container spacing={4} padding={10}>
           <Grid size={{ xs: 6, md: 8 }}>
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia

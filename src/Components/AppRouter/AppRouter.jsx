@@ -10,7 +10,9 @@ const Posts = lazy(() => import("../../Page/Post/Posts"));
 const PostDetail = lazy(() => import("../../Page/Post/PostDetail"));
 const Comments = lazy(() => import("../../Page/Comments/Comments"));
 const CommentsDetail = lazy(() => import("../../Page/Comments/CommentsDetail"));
+
 const TodoList = lazy(() => import("../../Page/todo/TodoList"));
+const Todos = lazy(() => import("../../Page/todo/Todos"));
 
 const routers = createBrowserRouter([
   {
@@ -33,9 +35,12 @@ const routers = createBrowserRouter([
         path: "/comments/:id",
         element: <CommentsDetail />,
       },
-
       {
-        path: "todo",
+        path: "todos",
+        element: <Todos />,
+      },
+      {
+        path: "todo/:id",
         element: <TodoList />,
       },
       {

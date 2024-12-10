@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import useAppContext from "../../Components/AppContext/useAppContext";
 import { USERS } from "../../Utils/menuConstants";
-import profile from "../../../public/profile_icon.jpg";
+import profile from "../../Assets/images/profile_icon.jpg";
 import Grid from "@mui/material/Grid";
 
 const UserDetails = () => {

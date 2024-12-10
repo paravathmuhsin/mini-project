@@ -2,9 +2,20 @@ import { useEffect, useState } from "react";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { getComments } from "../../Services/comments.service";
+import useAppContext from "../../Components/AppContext/useAppContext";
+import { COMMENTS } from "../../Utils/menuConstants";
 
 const Comments = () => {
   const [comments, setComments] = useState([]);
+  const { setContext } = useAppContext();
+
+  useEffect(() => {
+    setContext({
+      appTitle: "Comments",
+      breadcrumbs: [{ label: COMMENTS }],
+      activeMenu: COMMENTS,
+    });
+  }, []);
   useEffect(() => {
     getComments().then((res) => {
       setComments(res);

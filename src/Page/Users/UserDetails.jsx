@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import useAppContext from "../../Components/AppContext/useAppContext";
-import { USERS } from "../../Utils/menuConstants";
+import { HOME, USERS } from "../../Utils/menuConstants";
 import profile from "../../Assets/images/profile_icon.jpg";
 import Grid from "@mui/material/Grid";
 
@@ -25,6 +25,7 @@ const UserDetails = () => {
     setContext({
       appTitle: "Detailed View",
       breadcrumbs: [
+        { label: HOME, link: "/" },
         { label: USERS, link: "/users" },
         { label: "User Details" },
       ],

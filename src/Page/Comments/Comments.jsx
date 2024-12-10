@@ -3,7 +3,7 @@ import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { getComments } from "../../Services/comments.service";
 import useAppContext from "../../Components/AppContext/useAppContext";
-import { COMMENTS } from "../../Utils/menuConstants";
+import { COMMENTS, HOME } from "../../Utils/menuConstants";
 
 const Comments = () => {
   const [comments, setComments] = useState([]);
@@ -12,7 +12,7 @@ const Comments = () => {
   useEffect(() => {
     setContext({
       appTitle: "Comments",
-      breadcrumbs: [{ label: COMMENTS }],
+      breadcrumbs: [{ label: HOME, link: "/" }, { label: COMMENTS }],
       activeMenu: COMMENTS,
     });
   }, []);
@@ -36,8 +36,7 @@ const Comments = () => {
               gutterBottom
               sx={{ color: "text.secondary", fontSize: 13 }}
             >
-              {"Email : " + item.email}  
-              
+              {"Email : " + item.email}
             </Typography>
             <Typography variant="body2">{item.body}</Typography>
           </CardContent>

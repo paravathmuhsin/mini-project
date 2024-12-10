@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Card, CardContent, Typography } from "@mui/material";
 import { getComment } from "../../Services/comments.service";
 import useAppContext from "../../Components/AppContext/useAppContext";
-import { COMMENTS } from "../../Utils/menuConstants";
+import { COMMENTS, HOME } from "../../Utils/menuConstants";
 
 const CommentsDetail = () => {
   const { id } = useParams();
@@ -13,7 +13,11 @@ const CommentsDetail = () => {
   useEffect(() => {
     setContext({
       appTitle: "Comment Details",
-      breadcrumbs: [{ label: COMMENTS, link: "/" }, { label: "Comment Details" }],
+      breadcrumbs: [
+        { label: HOME, link: "/" },
+        { label: COMMENTS, link: "/comments" },
+        { label: "Comment Details" },
+      ],
       activeMenu: COMMENTS,
     });
   }, []);

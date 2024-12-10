@@ -3,7 +3,7 @@ import { getUsers } from "../../Services/post.service";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import useAppContext from "../../Components/AppContext/useAppContext";
-import { USERS } from "../../Utils/menuConstants";
+import { HOME, USERS } from "../../Utils/menuConstants";
 
 const User = () => {
   const { setContext } = useAppContext();
@@ -11,7 +11,7 @@ const User = () => {
   useEffect(() => {
     setContext({
       appTitle: "Users",
-      breadcrumbs: [{ label: USERS }],
+      breadcrumbs: [{ label: HOME, link: "/" }, { label: USERS }],
       activeMenu: USERS,
     });
   }, []);

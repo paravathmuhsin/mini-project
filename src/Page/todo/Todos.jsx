@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { getTodos } from "../../Services/todos.service";
 import useAppContext from "../../Components/AppContext/useAppContext";
-import { TASKS } from "../../Utils/menuConstants";
+import { HOME, TASKS } from "../../Utils/menuConstants";
 
 const Todos = () => {
   const [todos, setTodos] = useState([]);
@@ -19,7 +19,7 @@ const Todos = () => {
   useEffect(() => {
     setContext({
       appTitle: "Todos",
-      breadcrumbs: [{ label: TASKS }],
+      breadcrumbs: [{ label: HOME, link: "/" }, { label: TASKS }],
       activeMenu: TASKS,
     });
   }, []);

@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { getTodo } from "../../Services/todos.service";
 import useAppContext from "../../Components/AppContext/useAppContext";
-import { TASKS } from "../../Utils/menuConstants";
+import { HOME, TASKS } from "../../Utils/menuConstants";
 
 const TodoList = () => {
   const { id } = useParams();
@@ -20,7 +20,11 @@ const TodoList = () => {
   useEffect(() => {
     setContext({
       appTitle: "Task List",
-      breadcrumbs: [{ label: TASKS, link: "/todos" }, { label: "Task List" }],
+      breadcrumbs: [
+        { label: HOME, link: "/" },
+        { label: TASKS, link: "/todos" },
+        { label: "Task List" },
+      ],
       activeMenu: TASKS,
     });
   }, []);

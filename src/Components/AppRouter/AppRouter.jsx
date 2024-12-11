@@ -13,6 +13,10 @@ const CommentsDetail = lazy(() => import("../../Page/Comments/CommentsDetail"));
 const TodoList = lazy(() => import("../../Page/todo/TodoList"));
 const Todos = lazy(() => import("../../Page/todo/Todos"));
 
+const Albums = lazy(() => import("../../Page/Album/Albums"));
+const AlbumDetails = lazy(() => import("../../Page/Album/AlbumDetails"));
+
+
 const routers = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +53,14 @@ const routers = createBrowserRouter([
       {
         path: "users/:id",
         element: <UserDetails />,
+      },
+      {
+        path: "albums",
+        element: <Albums />,
+      },
+      {
+        path: "albums/:id", 
+        element: <AlbumDetails />,
       },
     ],
   },

@@ -14,7 +14,8 @@ import { setLogout } from "../../../Store/actions/login.action";
 import ChatBubbleRoundedIcon from "@mui/icons-material/ChatBubbleRounded";
 import TaskRoundedIcon from "@mui/icons-material/TaskRounded";
 import useAppContext from "../../AppContext/useAppContext";
-import { COMMENTS, HOME, TASKS, USERS } from "../../../Utils/menuConstants";
+import PhotoLibraryRoundedIcon from '@mui/icons-material/PhotoLibraryRounded';
+import { ALBUM, COMMENTS, HOME, TASKS, USERS } from "../../../Utils/menuConstants";
 
 export default function MenuContent() {
   const nav = useNavigate();
@@ -56,6 +57,13 @@ export default function MenuContent() {
       icon: <PersonIcon />,
       click: () => {
         nav("/users");
+      },
+    },
+    {
+      text: ALBUM,
+      icon: <PhotoLibraryRoundedIcon />,
+      click: () => {
+        nav("/albums");
       },
     },
   ];

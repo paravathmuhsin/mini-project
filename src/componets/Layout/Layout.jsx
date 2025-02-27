@@ -9,6 +9,8 @@ import SideMenu from "./SideMenu";
 import AppTheme from "../theme/AppTheme";
 import Header from "./Header";
 import MainGrid from "./MainGrid";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router";
 // import {
 //   chartsCustomizations,
 //   dataGridCustomizations,
@@ -24,7 +26,8 @@ import MainGrid from "./MainGrid";
 // };
 
 export default function Layout(props) {
-  return (
+  const { isLoggedin } = useSelector((state) => state.login);
+  return isLoggedin ? (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: "flex" }}>
@@ -54,5 +57,7 @@ export default function Layout(props) {
         </Box>
       </Box>
     </AppTheme>
+  ) : (
+    <Navigate to="/sign-in" />
   );
 }

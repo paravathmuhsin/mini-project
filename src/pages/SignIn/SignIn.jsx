@@ -1,20 +1,17 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
 import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Divider from "@mui/material/Divider";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
-// import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import MuiCard from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import AppTheme from "../../componets/theme/AppTheme";
-import { Link, useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -59,43 +56,52 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignIn(props) {
+  const { isLoggedin } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
-  const [open, setOpen] = React.useState(false);
+  const emailRef = React.useRef();
+  const passwordRef = React.useRef();
   const nav = useNavigate();
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const handleSubmit = (formData) => {
+    // console.log(formData.get());
+    // nav("/");
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    // if (emailError || passwordError) {
+    //   event.preventDefault();
+    //   return;
+    // }
+    // console.log({
+    //   email: formData.get("email"),
+    //   password: formData.get("password"),
+    // });
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    nav("/");
-
-    if (emailError || passwordError) {
-      event.preventDefault();
-      return;
+    if (email === "test@gmail.com" && password === "12345") {
+      const user = {
+        name: "David",
+        email: "test@gmail.com",
+      };
+      localStorage.setItem("isLoggedin", true);
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      dispatch({ type: "SET_LOGIN", payload: user });
+      nav("/");
+    } else {
+      alert("Invalid credetials");
     }
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
   };
 
   const validateInputs = () => {
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
-
     let isValid = true;
 
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+    if (
+      !emailRef.current.value ||
+      !/\S+@\S+\.\S+/.test(emailRef.current.value)
+    ) {
       setEmailError(true);
       setEmailErrorMessage("Please enter a valid email address.");
       isValid = false;
@@ -104,9 +110,9 @@ export default function SignIn(props) {
       setEmailErrorMessage("");
     }
 
-    if (!password.value || password.value.length < 6) {
+    if (!passwordRef.current.value || passwordRef.current.value.length < 5) {
       setPasswordError(true);
-      setPasswordErrorMessage("Password must be at least 6 characters long.");
+      setPasswordErrorMessage("Password must be at least 5 characters long.");
       isValid = false;
     } else {
       setPasswordError(false);
@@ -116,7 +122,9 @@ export default function SignIn(props) {
     return isValid;
   };
 
-  return (
+  return isLoggedin ? (
+    <Navigate to="/" />
+  ) : (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
@@ -130,7 +138,7 @@ export default function SignIn(props) {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            action={handleSubmit}
             noValidate
             sx={{
               display: "flex",
@@ -154,6 +162,7 @@ export default function SignIn(props) {
                 fullWidth
                 variant="outlined"
                 color={emailError ? "error" : "primary"}
+                inputRef={emailRef}
               />
             </FormControl>
             <FormControl>
@@ -171,6 +180,7 @@ export default function SignIn(props) {
                 fullWidth
                 variant="outlined"
                 color={passwordError ? "error" : "primary"}
+                inputRef={passwordRef}
               />
             </FormControl>
             <Button

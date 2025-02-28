@@ -12,6 +12,7 @@ import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import MenuButton from "./MenuButton";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
+import { setLogoutAction } from "../../store/actions/login.action";
 
 const MenuItem = styled(MuiMenuItem)({
   margin: "2px 0",
@@ -28,7 +29,7 @@ export default function OptionsMenu() {
   const logout = () => {
     localStorage.removeItem("isLoggedin");
     localStorage.removeItem("currentUser");
-    dispatch({ type: "SET_LOGOUT" });
+    dispatch(setLogoutAction());
     handleClose();
     nav("/sign-in");
   };

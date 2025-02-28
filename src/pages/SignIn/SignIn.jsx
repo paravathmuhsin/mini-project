@@ -12,6 +12,7 @@ import { styled } from "@mui/material/styles";
 import AppTheme from "../../componets/theme/AppTheme";
 import { Navigate, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
+import { setLoginAction } from "../../store/actions/login.action";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -88,7 +89,7 @@ export default function SignIn(props) {
       };
       localStorage.setItem("isLoggedin", true);
       localStorage.setItem("currentUser", JSON.stringify(user));
-      dispatch({ type: "SET_LOGIN", payload: user });
+      dispatch(setLoginAction(user));
       nav("/");
     } else {
       alert("Invalid credetials");

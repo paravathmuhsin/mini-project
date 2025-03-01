@@ -22,6 +22,10 @@ const Drawer = styled(MuiDrawer)({
 });
 
 export default function SideMenu() {
+
+  const currentUser= JSON.parse(localStorage.getItem("currentUser"));
+    
+
   return (
     <Drawer
       variant="permanent"
@@ -73,10 +77,12 @@ export default function SideMenu() {
             variant="body2"
             sx={{ fontWeight: 500, lineHeight: "16px" }}
           >
-            Riley Carter
+            {/* Riley Carter */}
+            {currentUser.name}
           </Typography>
           <Typography variant="caption" sx={{ color: "text.secondary" }}>
-            riley@email.com
+            {/* riley@email.com */}
+            {currentUser.email}
           </Typography>
         </Box>
         <OptionsMenu />

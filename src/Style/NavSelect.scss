@@ -1,0 +1,10 @@
+.appNav-scss{
+    margin-bottom: 20px;
+    a{
+        margin-right: 20px;
+        padding: 10px;
+        &.active{
+            background-color: aqua;
+        }
+    }
+}

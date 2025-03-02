@@ -5,23 +5,26 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import { Link } from "react-router";
+import { NavLink } from "react-router";
+import { Task } from "@mui/icons-material";
+import "../../assets/style.scss";
 
-const mainListItems = [{ text: "Home", to: "/", icon: <HomeRoundedIcon /> }];
+
+const mainListItems = [{ text: "Home", to: "/", icon: <HomeRoundedIcon /> },{text:"Todos", to: "/todos", icon:<Task/> }];
 
 export default function MenuContent() {
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
       <List dense>
         {mainListItems.map((item, index) => (
-          <Link key={index} to={item.to}>
+          <NavLink key={index} to={item.to} className={({ isActive }) => (isActive ? "active" : "")} >
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton selected={index === 0}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItemButton>
             </ListItem>
-          </Link>
+          </NavLink>
         ))}
       </List>
     </Stack>

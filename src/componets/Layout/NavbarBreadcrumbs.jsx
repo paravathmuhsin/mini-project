@@ -19,15 +19,15 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
 
 export default function NavbarBreadcrumbs() {
   const location = useLocation();
-  // const path = location.pathname;
-  const { id } = useParams();
+  const path = location.pathname;
+  const { userId } = useParams();
   const [userName, setUserName] = useState(null);
 
   useEffect(() => {
-    if (id) {
-      getUser(id).then((res) => setUserName(res.name));
+    if (userId) {
+      getUser(userId).then((res) => setUserName(res.name));
     }
-  }, [id]);
+  }, [userId]);
   return (
     <StyledBreadcrumbs
       aria-label="breadcrumb"
@@ -35,19 +35,19 @@ export default function NavbarBreadcrumbs() {
     >
      <Typography variant="body1">Dashboard</Typography>
 
-{location.pathname === "/" && (
+{path === "/" && (
   <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600 }}>
     Home
   </Typography>
 )}
 
-{location.pathname.startsWith("/users") && (
+{path.startsWith("/users") && (
   <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600 }}>
     Users
   </Typography>
 )}
 
-{id && userName && (
+{userId && userName && (
   <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600 }}>
     {userName}
   </Typography>

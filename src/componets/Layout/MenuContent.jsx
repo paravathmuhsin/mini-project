@@ -7,18 +7,20 @@ import Stack from "@mui/material/Stack";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 const mainListItems = [{ text: "Home", to: "/", icon: <HomeRoundedIcon /> }, { text: "Users", to: "/users", icon: <PeopleRoundedIcon /> }];
 
 export default function MenuContent() {
+  const location = useLocation();
+  const path= location.pathname
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
       <List dense>
         {mainListItems.map((item, index) => (
           <Link key={index} to={item.to}>
             <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton selected={index === 0}>
+              <ListItemButton selected={path === item.to}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItemButton>

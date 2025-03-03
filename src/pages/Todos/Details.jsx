@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { gettodo, getuser } from "../../services/post.service";
+import { gettodo, getUser } from "../../services/post.service"
 import "./style.scss";
 
 const Details = () => {

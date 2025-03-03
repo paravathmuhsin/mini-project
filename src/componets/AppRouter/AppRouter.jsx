@@ -7,6 +7,8 @@ const PostList = lazy(() => import("../../pages/Post/List"));
 const PostDetails = lazy(() => import("../../pages/Post/Details"));
 const UsersList = lazy(() => import("../../pages/Users/List"));
 const UserDetails = lazy(() => import("../../pages/Users/Details"));
+const TodosList = lazy(()=> import("../../pages/Todos/List"));
+const TodosDetails = lazy(()=> import("../../pages/Todos/Details"));
 
 const AppRouter = () => {
   return (
@@ -17,6 +19,8 @@ const AppRouter = () => {
           <Route path="posts/:id" element={<PostDetails />} />
           <Route path="users" element={<UsersList />} />
           <Route path="users/:id" element={<UserDetails />} />
+          <Route path="/todos" element={<TodosList/>} />
+          <Route path="/todos/:id" element={<TodosDetails/>} />
         </Route>
         <Route path="sign-in" element={<SignIn />} />
 

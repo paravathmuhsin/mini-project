@@ -1,0 +1,82 @@
+.card_wrapper {
+  flex-wrap: wrap;
+  display: flex;
+  span {
+    background-color: hsla(220, 20%, 80%, 1.4);
+    padding: 10px;
+    display: block;
+  }
+}
+.card_inner_wrapper {
+  color: hsl(220, 30%, 6%);
+  overflow: hidden;
+  gap: 16px;
+  transition: 100ms;
+  background-color: rgb(245, 246, 250);
+  border-radius: 8px;
+  border: 1px solid hsla(220, 20%, 80%, 0.4);
+  box-shadow: none;
+  height: fit-content;
+  min-height: 120px;
+  width: 20%;
+  margin: 20px;
+  p {
+    margin: 0px 0px 0.35em;
+    font-family: Inter, sans-serif;
+    font-size: 0.8rem;
+    line-height: 21px;
+    font-weight: bold;
+    padding: 10px;
+  }
+  a {
+    color: white;
+    padding: 5px;
+    margin: 10px;
+    background-color: rgb(5, 7, 10);
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    cursor: pointer;
+    min-width: 64px;
+    font-size: 0.77rem;
+  }
+  a:hover {
+    background-color: #3f3e3d;
+  }
+}
+.card_inner_wrapper:hover {
+  box-shadow: 2px 2px 10px rgb(148 145 145 / 50%);
+}
+.card_detail_wrapper {
+  background-color: rgb(245, 246, 250);
+  border-radius: 8px;
+  border: 1px solid hsla(220, 20%, 80%, 0.4);
+  box-shadow: none;
+  height: fit-content;
+  min-height: 300px;
+  margin: 10px;
+  width: 1000px;
+  .card_detail_header {
+    height: 50px;
+    display: block;
+    font-size: 18px;
+    padding: 10px;
+    font-weight: bold;
+  }
+  .c_green {
+    background-color: #6bbc6b;
+  }
+  .nc_red {
+    background-color: red;
+  }
+  .card_detail_content{
+    padding: 20px;
+    h2 {
+        font-size: 16px;
+    }
+  }
+}
+.user_detail {
+  color: brown;
+}

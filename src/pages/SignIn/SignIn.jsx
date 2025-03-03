@@ -84,7 +84,7 @@ export default function SignIn(props) {
 
     if (email === "test@gmail.com" && password === "12345") {
       const user = {
-        name: "David",
+        name: "David Thomas",
         email: "test@gmail.com",
       };
       localStorage.setItem("isLoggedin", true);

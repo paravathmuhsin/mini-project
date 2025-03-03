@@ -17,6 +17,11 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
   },
 }));
 
+//console.log(window.location.href);
+//const url=window.location.href;
+//const urlSegments = url.split('/').filter((segment) => segment);
+//console.log(urlSegments);
+
 export default function NavbarBreadcrumbs() {
   const location = useLocation();
   const path = location.pathname;

@@ -6,6 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
+import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
 import { Task } from "@mui/icons-material";
 import { Link, useLocation } from "react-router";
 
@@ -13,6 +14,7 @@ const mainListItems = [
   { text: "Home", to: "/", icon: <HomeRoundedIcon /> },
   { text: "Users", to: "/users", icon: <PeopleRoundedIcon /> },
   { text: "Todos", to: "/todos", icon: <Task /> },
+  { text: "Comments", to: "/comments", icon: <CommentRoundedIcon /> },
 ];
 
 export default function MenuContent() {

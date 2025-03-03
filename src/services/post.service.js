@@ -8,4 +8,13 @@ export const gettodos = () => axios.get("todos").then((res) => res.data);
 
 export const gettodo = (id) => axios.get(`todos/${id}`).then((res) => res.data);
 
-export const getuser = (id) => axios.get(`users/${id}`).then((res) => res.data);
+export const getComments = () => axios.get("comments").then((res) => res.data);
+
+export const getComment = (id) =>
+  axios.get(`comments/${id}`).then((res) => res.data);
+
+export const getPhoto = (id) =>
+  axios.get(`photos/${id}`).then((res) => res.data);
+
+export const getUser = (id) =>
+  axios.get(`users/${id}`).then((res3) => res3.data);

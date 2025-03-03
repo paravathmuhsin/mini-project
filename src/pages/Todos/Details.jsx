@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { gettodo, getuser } from "../../services/post.service";
+import { getTodo } from "../../services/todos.service";
+import { getUser } from "../../services/user.service";
 import "./style.scss";
 
 const Details = () => {
@@ -10,7 +11,7 @@ const Details = () => {
   const [userDetail, setUserDetails] = useState();
 
   useEffect(() => {
-    gettodo(id).then((res) => {
+    getTodo(id).then((res) => {
       setTodos(res);
       // setUser(res.userId);
     });
@@ -18,7 +19,7 @@ const Details = () => {
 
   useEffect(() => {
     if (todos?.userId) {
-      getuser(todos.userId).then((res1) => {
+      getUser(todos.userId).then((res1) => {
         setUserDetails(res1);
       });
     }

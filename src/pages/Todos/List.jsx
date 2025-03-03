@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { gettodos } from "../../services/post.service";
+import { getTodos } from "../../services/todos.service";
 import "./style.scss";
 
 const List = () => {
   const [todos, setTodos] = useState([]);
   useEffect(() => {
-    gettodos().then((res) => {
+    getTodos().then((res) => {
       setTodos(res);
     });
   }, []);

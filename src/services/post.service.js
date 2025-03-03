@@ -13,8 +13,9 @@ export const getComments = () => axios.get("comments").then((res) => res.data);
 export const getComment = (id) =>
   axios.get(`comments/${id}`).then((res) => res.data);
 
-export const getPhoto = (id) =>
-  axios.get(`photos/${id}`).then((res) => res.data);
-
 export const getUser = (id) =>
   axios.get(`users/${id}`).then((res3) => res3.data);
+
+export const getPhotos = () => axios.get("photos").then((res) => res.data);
+export const getPhoto = (id) =>
+  axios.get(`photos/${id}`).then((res) => res.data);

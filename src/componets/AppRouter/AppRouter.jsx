@@ -11,6 +11,8 @@ const TodosList = lazy(()=> import("../../pages/Todos/List"));
 const TodosDetails = lazy(()=> import("../../pages/Todos/Details"));
 const CommentList = lazy(() => import("../../pages/Comments/CList"));
 const CommentDetails = lazy(() => import("../../pages/Comments/CDetails"));
+const PhotosList = lazy(() => import("../../pages/Photos/PhotosList"));
+const Photos = lazy(() => import("../../pages/Photos/Photos"));
 
 const AppRouter = () => {
   return (
@@ -25,6 +27,8 @@ const AppRouter = () => {
           <Route path="todos/:id" element={<TodosDetails/>} />
           <Route path="comments" element={<CommentList />} />
           <Route path="comments/:id" element={<CommentDetails />} />
+          <Route path="photos" element={<PhotosList />} />
+          <Route path="photos/:id" element={<Photos />} />
         </Route>
         <Route path="sign-in" element={<SignIn />} />
 

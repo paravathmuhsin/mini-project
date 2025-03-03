@@ -1,0 +1,8 @@
+.photos {
+    display: flex;
+    flex-wrap: wrap;
+}
+.photo {
+    padding: 10px;
+    border: 1px solid black;
+}

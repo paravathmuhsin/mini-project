@@ -5,9 +5,13 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import PhotoLibraryIcon from "@mui/icons-material/HomeRounded";
 import { Link } from "react-router";
 
-const mainListItems = [{ text: "Home", to: "/", icon: <HomeRoundedIcon /> }];
+const mainListItems = [{ 
+  text: "Home", to: "/", icon: <HomeRoundedIcon />,
+},
+{ text: 'Photos List', to: '/photos-list', icon: <PhotoLibraryIcon /> }];
 
 export default function MenuContent() {
   return (

@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { getUsers } from "../../services/user.service";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+} from "@mui/material";
 
 const List = () => {
   const [users, setUsers] = useState([]);
@@ -14,8 +23,19 @@ const List = () => {
   }, []);
 
   return (
-    <TableContainer component={Paper} sx={{ maxWidth: 800, margin: "auto", mt: 4, boxShadow: 3, borderRadius: 2 }}>
-      <Typography variant="h6" align="center" sx={{ mt: 2 }}>Users List</Typography>
+    <TableContainer
+      component={Paper}
+      sx={{
+        maxWidth: 800,
+        margin: "auto",
+        mt: 4,
+        boxShadow: 3,
+        borderRadius: 2,
+      }}
+    >
+      <Typography variant="h6" align="center" sx={{ mt: 2 }}>
+        Users List
+      </Typography>
       <Table>
         <TableHead>
           <TableRow>
@@ -26,9 +46,9 @@ const List = () => {
         </TableHead>
         <TableBody>
           {users.map((item, index) => (
-            <TableRow 
-              key={item.id} 
-              onClick={() => navigate(`/users/${item.id}`)} 
+            <TableRow
+              key={item.id}
+              onClick={() => navigate(`/users/${item.id}`)}
               sx={{ cursor: "pointer", "&:hover": { backgroundColor: "#333" } }}
             >
               <TableCell>{index + 1}</TableCell>

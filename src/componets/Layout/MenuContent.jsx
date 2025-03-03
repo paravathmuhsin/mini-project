@@ -9,11 +9,14 @@ import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 
 import { Link, useLocation } from "react-router";
 
-const mainListItems = [{ text: "Home", to: "/", icon: <HomeRoundedIcon /> }, { text: "Users", to: "/users", icon: <PeopleRoundedIcon /> }];
+const mainListItems = [
+  { text: "Home", to: "/", icon: <HomeRoundedIcon /> },
+  { text: "Users", to: "/users", icon: <PeopleRoundedIcon /> },
+];
 
 export default function MenuContent() {
   const location = useLocation();
-  const path= location.pathname
+  const path = location.pathname;
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
       <List dense>

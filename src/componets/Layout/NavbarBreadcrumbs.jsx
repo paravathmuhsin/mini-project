@@ -1,10 +1,10 @@
-import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import Breadcrumbs, { breadcrumbsClasses } from '@mui/material/Breadcrumbs';
-import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
-import { useLocation, useParams } from 'react-router';
-import { useEffect, useState } from 'react';
-import { getUser } from '../../services/user.service';
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import Breadcrumbs, { breadcrumbsClasses } from "@mui/material/Breadcrumbs";
+import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
+import { useLocation, useParams } from "react-router";
+import { useEffect, useState } from "react";
+import { getUser } from "../../services/user.service";
 
 const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
   margin: theme.spacing(1, 0),
@@ -13,7 +13,7 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
     margin: 1,
   },
   [`& .${breadcrumbsClasses.ol}`]: {
-    alignItems: 'center',
+    alignItems: "center",
   },
 }));
 
@@ -33,25 +33,34 @@ export default function NavbarBreadcrumbs() {
       aria-label="breadcrumb"
       separator={<NavigateNextRoundedIcon fontSize="small" />}
     >
-     <Typography variant="body1">Dashboard</Typography>
+      <Typography variant="body1">Dashboard</Typography>
 
-{path === "/" && (
-  <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600 }}>
-    Home
-  </Typography>
-)}
+      {path === "/" && (
+        <Typography
+          variant="body1"
+          sx={{ color: "text.primary", fontWeight: 600 }}
+        >
+          Home
+        </Typography>
+      )}
 
-{path.startsWith("/users") && (
-  <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600 }}>
-    Users
-  </Typography>
-)}
+      {path.startsWith("/users") && (
+        <Typography
+          variant="body1"
+          sx={{ color: "text.primary", fontWeight: 600 }}
+        >
+          Users
+        </Typography>
+      )}
 
-{userId && userName && (
-  <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600 }}>
-    {userName}
-  </Typography>
-)}
+      {userId && userName && (
+        <Typography
+          variant="body1"
+          sx={{ color: "text.primary", fontWeight: 600 }}
+        >
+          {userName}
+        </Typography>
+      )}
     </StyledBreadcrumbs>
   );
 }

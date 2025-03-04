@@ -11,15 +11,29 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import { useAppContext } from "../../componets/AppContext/AppContext";
 
 const List = () => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-
+  const { setPageTitle, setAppBreadcrumbs } = useAppContext();
   useEffect(() => {
     getUsers().then((res) => {
       setUsers(res);
     });
+  }, []);
+  useEffect(() => {
+    setPageTitle("Users List");
+    setAppBreadcrumbs([
+      {
+        label: "Home",
+        link: "/",
+      },
+      {
+        label: "Users",
+        link:"/users"
+      },
+    ]);
   }, []);
 
   return (

@@ -7,6 +7,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import MenuContent from "./MenuContent";
 import OptionsMenu from "./OptionsMenu";
+import { IconButton } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -22,9 +24,7 @@ const Drawer = styled(MuiDrawer)({
 });
 
 export default function SideMenu() {
-
-  const currentUser= JSON.parse(localStorage.getItem("currentUser"));
-    
+  const { currentUser } = useSelector((state) => state.login);
 
   return (
     <Drawer
@@ -66,12 +66,15 @@ export default function SideMenu() {
           borderColor: "divider",
         }}
       >
-        <Avatar
-          sizes="small"
-          alt="Riley Carter"
-          src="/static/images/avatar/7.jpg"
-          sx={{ width: 36, height: 36 }}
-        />
+        <IconButton
+          size="small"
+          sx={{ ml: 2 }}
+          aria-controls={open ? "account-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+        >
+          <Avatar sx={{ width: 32, height: 32 }}>{currentUser.name[0]}</Avatar>
+        </IconButton>
         <Box sx={{ mr: "auto" }}>
           <Typography
             variant="body2"

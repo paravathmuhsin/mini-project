@@ -6,7 +6,7 @@ import { useAppContext } from "../../componets/AppContext/AppContext";
 const Details = () => {
   const { id } = useParams();
   const [post, setPost] = useState();
-  const { setPageTitle } = useAppContext();
+  const { setPageTitle, setAppBreadcrumbs } = useAppContext();
 
   useEffect(() => {
     getPost(id).then((res) => {
@@ -16,10 +16,18 @@ const Details = () => {
 
   useEffect(() => {
     setPageTitle("Post Details");
+    setAppBreadcrumbs([
+      {
+        label: "Home",
+        link: "/",
+      },
+      {
+        label: "Post details",
+      },
+    ]);
   }, []);
   return (
     <div>
-      Details
       {post && (
         <>
           <h3>{post.title}</h3>

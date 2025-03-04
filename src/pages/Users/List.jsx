@@ -12,16 +12,25 @@ import {
   Typography,
 } from "@mui/material";
 import { useAppContext } from "../../componets/AppContext/AppContext";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserAction } from "../../store/actions/user.action";
 
 const List = () => {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const navigate = useNavigate();
+  const { list: users } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const { setPageTitle, setAppBreadcrumbs } = useAppContext();
+  // useEffect(() => {
+  //   getUsers().then((res) => {
+  //     setUsers(res);
+  //   });
+  // }, []);
   useEffect(() => {
-    getUsers().then((res) => {
-      setUsers(res);
-    });
-  }, []);
+      if (!users.length) {
+        dispatch(fetchUserAction());
+      }
+    }, [users]);
   useEffect(() => {
     setPageTitle("Users List");
     setAppBreadcrumbs([

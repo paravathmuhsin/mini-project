@@ -5,6 +5,8 @@ import { getComment, getUser } from "../../services/post.service";
 //import { getUser } from "../../services/post.service";
 //import { getPhoto } from "../../services/post.service";
 //import { getComment } from "../../services/post.service";
+import { useAppContext } from "../../componets/AppContext/AppContext";
+import { Typography } from "@mui/material";
 
 const CDetails = () => {
   const [comment, setComment] = useState();
@@ -14,6 +16,7 @@ const CDetails = () => {
   //console.log(param);
   //const {id}=useParams();
   let { id } = useParams();
+  const { setPageTitle, setAppBreadcrumbs } = useAppContext();
 
   //Comments
   useEffect(() => {
@@ -21,6 +24,11 @@ const CDetails = () => {
       setComment(res);
     });
   }, [id]);
+
+  // if (!comment)
+  //   return (
+  //     <Typography sx={{ textAlign: "center", mt: 4 }}>Loading...</Typography>
+  //   );
 
   //Photos
   // useEffect(()=>{
@@ -46,6 +54,20 @@ const CDetails = () => {
   // });
 
   //console.log(id);
+
+  //breadcrumbs
+  useEffect(() => {
+    setPageTitle("Comment Details");
+    setAppBreadcrumbs([
+      {
+        label: "Comment",
+        link: "/comments",
+      },
+      {
+        label: "Comment details",
+      },
+    ]);
+  }, []);
 
   //Users
   useEffect(() => {

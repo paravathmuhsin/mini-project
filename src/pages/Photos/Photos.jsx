@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getPhoto } from "../../services/post.service";
 import "./photos.scss";
+import { getPhoto } from "../../services/photos.service";
+import { useAppContext } from "../../componets/AppContext/AppContext";
 
 function Photos() {
+const { setPageTitle } = useAppContext();
 
   const { id } = useParams();
   const [photos, setPhotos] = useState();
@@ -13,9 +15,13 @@ function Photos() {
     });
   }, [id]);
 
+  useEffect(() => {
+    setPageTitle("Gallery Detail");
+  }, []);
+
   return (
     <div>
-      <h2>Photo Detail Page {id}</h2>
+      <h2>{setPageTitle}{id}</h2>
       {/* <h3>{photos&& photos.title}</h3> */}
 
       {photos && (

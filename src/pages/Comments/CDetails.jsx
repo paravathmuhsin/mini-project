@@ -2,19 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import GeoLocationMap from "../../utils/GeoLocationMap";
 import { getComment, getUser } from "../../services/post.service";
-//import { getUser } from "../../services/post.service";
-//import { getPhoto } from "../../services/post.service";
-//import { getComment } from "../../services/post.service";
 import { useAppContext } from "../../componets/AppContext/AppContext";
-import { Typography } from "@mui/material";
 
 const CDetails = () => {
   const [comment, setComment] = useState();
-  //const [photo,setPhoto]=useState();
   const [user, setUser] = useState();
-  //const param=useParams();
-  //console.log(param);
-  //const {id}=useParams();
   let { id } = useParams();
   const { setPageTitle, setAppBreadcrumbs } = useAppContext();
 

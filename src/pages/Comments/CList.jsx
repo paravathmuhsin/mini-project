@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router";
-import { getComments } from "../../services/post.service";
 import { useAppContext } from "../../componets/AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCommentAction } from "../../store/actions/comment.action";

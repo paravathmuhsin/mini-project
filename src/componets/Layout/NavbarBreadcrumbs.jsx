@@ -1,7 +1,9 @@
-import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import Breadcrumbs, { breadcrumbsClasses } from '@mui/material/Breadcrumbs';
-import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import Breadcrumbs, { breadcrumbsClasses } from "@mui/material/Breadcrumbs";
+import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
+import { Link } from "react-router";
+import { useAppContext } from "../AppContext/AppContext";
 
 const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
   margin: theme.spacing(1, 0),
@@ -10,20 +12,57 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
     margin: 1,
   },
   [`& .${breadcrumbsClasses.ol}`]: {
-    alignItems: 'center',
+    alignItems: "center",
   },
 }));
 
+//console.log(window.location.href);
+//const url=window.location.href;
+//const urlSegments = url.split('/').filter((segment) => segment);
+//console.log(urlSegments);
+
 export default function NavbarBreadcrumbs() {
+
+  // const location = useLocation(); // Get the current location object
+  // const [page, setPage] = useState('Home');
+
+  // useEffect(() => {
+  //   const urlSegments = window.location.href.split('/').filter((segment) => segment);
+  //   //console.log(location);
+  //   // Set the page state based on the URL segments
+  //   if (urlSegments[2] == null) {
+  //     setPage("Home");  // If there's no third segment, set it to "Home"
+  //   } else {
+  //     setPage(urlSegments[2]);  // Otherwise, set it to the third URL segment
+  //   }
+  // }, [location]);
+  
+  const { appBreadcrumbs } = useAppContext();
+
   return (
     <StyledBreadcrumbs
       aria-label="breadcrumb"
       separator={<NavigateNextRoundedIcon fontSize="small" />}
     >
-      <Typography variant="body1">Dashboard</Typography>
-      <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600 }}>
-        Home
-      </Typography>
+      {appBreadcrumbs.map((item) => {
+        if (item.link) {
+          return (
+            <Link key={item.label} to={item.link}>
+              <Typography variant="body1">{item.label}</Typography>
+            </Link>
+          );
+        } else {
+          return (
+            <Typography
+              key={item.label}
+              variant="body1"
+              sx={{ color: "text.primary", fontWeight: 600 }}
+            >
+              {item.label}
+            </Typography>
+          );
+        }
+      })}
     </StyledBreadcrumbs>
   );
 }

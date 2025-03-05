@@ -8,16 +8,37 @@ import EmailIcon from "@mui/icons-material/Email";
 import LanguageIcon from "@mui/icons-material/Language";
 import BusinessIcon from "@mui/icons-material/Business";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { useAppContext } from "../../componets/AppContext/AppContext";
 
 const Details = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
+  const { setPageTitle, setAppBreadcrumbs } = useAppContext();
 
   useEffect(() => {
+    
     getUser(id).then((res) => {
       setUser(res);
     });
   }, [id]);
+  useEffect(() => {
+    setPageTitle("User Details");
+    if (user){
+    setAppBreadcrumbs([
+      {
+        label: "Home",
+        link: "/",
+      },
+      {
+        label: "Users",
+        link:"/users"
+      },
+      {
+        label: `${user.name}`,
+        link:`/users/${id}`
+      },
+    ])};
+  }, [id,user]);
 
   if (!user)
     return (

@@ -2,9 +2,8 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs, { breadcrumbsClasses } from "@mui/material/Breadcrumbs";
 import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
-import { useLocation, useParams } from "react-router";
-import { useEffect, useState } from "react";
-import { getUser } from "../../services/user.service";
+import { Link } from "react-router";
+import { useAppContext } from "../AppContext/AppContext";
 
 const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
   margin: theme.spacing(1, 0),
@@ -23,49 +22,32 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
 //console.log(urlSegments);
 
 export default function NavbarBreadcrumbs() {
-  const location = useLocation();
-  const path = location.pathname;
-  const { userId } = useParams();
-  const [userName, setUserName] = useState(null);
+  const { appBreadcrumbs } = useAppContext();
 
-  useEffect(() => {
-    if (userId) {
-      getUser(userId).then((res) => setUserName(res.name));
-    }
-  }, [userId]);
   return (
     <StyledBreadcrumbs
       aria-label="breadcrumb"
       separator={<NavigateNextRoundedIcon fontSize="small" />}
     >
-      <Typography variant="body1">Dashboard</Typography>
-
-      {path === "/" && (
-        <Typography
-          variant="body1"
-          sx={{ color: "text.primary", fontWeight: 600 }}
-        >
-          Home
-        </Typography>
-      )}
-
-      {path.startsWith("/users") && (
-        <Typography
-          variant="body1"
-          sx={{ color: "text.primary", fontWeight: 600 }}
-        >
-          Users
-        </Typography>
-      )}
-
-      {userId && userName && (
-        <Typography
-          variant="body1"
-          sx={{ color: "text.primary", fontWeight: 600 }}
-        >
-          {userName}
-        </Typography>
-      )}
+      {appBreadcrumbs.map((item) => {
+        if (item.link) {
+          return (
+            <Link key={item.label} to={item.link}>
+              <Typography variant="body1">{item.label}</Typography>
+            </Link>
+          );
+        } else {
+          return (
+            <Typography
+              key={item.label}
+              variant="body1"
+              sx={{ color: "text.primary", fontWeight: 600 }}
+            >
+              {item.label}
+            </Typography>
+          );
+        }
+      })}
     </StyledBreadcrumbs>
   );
 }

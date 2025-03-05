@@ -6,7 +6,14 @@ export const useAppContext = () => useContext(Context);
 
 const AppContext = ({ children }) => {
   const [pageTitle, setPageTitle] = useState("");
-  return <Context value={{ pageTitle, setPageTitle }}>{children}</Context>;
+  const [appBreadcrumbs, setAppBreadcrumbs] = useState([]);
+  return (
+    <Context
+      value={{ pageTitle, appBreadcrumbs, setPageTitle, setAppBreadcrumbs }}
+    >
+      {children}
+    </Context>
+  );
 };
 
 export default AppContext;

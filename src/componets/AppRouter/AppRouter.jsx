@@ -5,6 +5,8 @@ const SignIn = lazy(() => import("../../pages/SignIn/SignIn"));
 const Layout = lazy(() => import("../Layout/Layout"));
 const PostList = lazy(() => import("../../pages/Post/List"));
 const PostDetails = lazy(() => import("../../pages/Post/Details"));
+const Photos = lazy(() => import("../../pages/Photos/PhotosComp"));
+const PhotoGallery = lazy(() => import("../../pages/Photos/PhotoGallery"));
 
 const AppRouter = () => {
   return (

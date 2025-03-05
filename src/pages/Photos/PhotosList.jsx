@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { getPhotos } from "../../services/post.service";
+import { getPhotos } from "../../services/photos.service";
 import "./photos.scss";
+import { useAppContext } from "../../componets/AppContext/AppContext";
 
 function PhotosList() {
+
+ const { setPageTitle } = useAppContext();
+
   const [photos, setPhotos] = useState([]);
   useEffect(() => {
     getPhotos().then((res) => {
@@ -12,9 +16,13 @@ function PhotosList() {
     });
   }, []);
 
+  useEffect(() => {
+    setPageTitle("Gallery");
+  }, []);
+
   return (
     <div>
-      <h2>Photos List</h2>
+      <h2>{setPageTitle}</h2>
       <div className="photos">
         {photos.map((item) => (
           <div key={item.id} className="photo">

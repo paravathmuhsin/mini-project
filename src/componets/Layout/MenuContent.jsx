@@ -7,7 +7,7 @@ import Stack from "@mui/material/Stack";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
-import PhotoLibraryIcon from "@mui/icons-material/HomeRounded";
+import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import { Task } from "@mui/icons-material";
 import { Link, useLocation } from "react-router";
 

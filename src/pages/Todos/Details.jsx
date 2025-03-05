@@ -3,12 +3,14 @@ import { useParams } from "react-router";
 import { getTodo } from "../../services/todos.service";
 import { getUser } from "../../services/user.service";
 import "./style.scss";
+import { useAppContext } from "../../componets/AppContext/AppContext";
 
 const Details = () => {
   const { id } = useParams();
   const [todos, setTodos] = useState();
   // const [user, setUser] = useState();
   const [userDetail, setUserDetails] = useState();
+  const { setPageTitle, setAppBreadcrumbs } = useAppContext();
 
   useEffect(() => {
     getTodo(id).then((res) => {
@@ -24,7 +26,18 @@ const Details = () => {
       });
     }
   }, [todos?.userId]);
-
+  useEffect(() => {
+    setPageTitle("Todos Details");
+    setAppBreadcrumbs([
+      {
+        label: "Todos list",
+        link: "/todos",
+      },
+      {
+        label: "Todos details",
+      },
+    ]);
+  }, []);
   return (
     <div>
       <h1>Details of todos</h1>

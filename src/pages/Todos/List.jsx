@@ -17,7 +17,7 @@ const List = () => {
     setPageTitle("Todos");
     setAppBreadcrumbs([
       {
-        label: "Todos",
+        label: "Todos list",
       },
     ]);
   }, []);

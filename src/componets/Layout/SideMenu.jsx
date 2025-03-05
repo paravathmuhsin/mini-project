@@ -24,6 +24,11 @@ const Drawer = styled(MuiDrawer)({
 });
 
 export default function SideMenu() {
+
+  //using local storage for getting login name
+  //const currentUser= JSON.parse(localStorage.getItem("currentUser"));
+
+  //using redux for getting login name
   const { currentUser } = useSelector((state) => state.login);
 
   return (
@@ -66,6 +71,15 @@ export default function SideMenu() {
           borderColor: "divider",
         }}
       >
+        {/* //to set static icons
+        <Avatar
+          sizes="small"
+          alt="Riley Carter"
+          src="/static/images/avatar/7.jpg"
+          sx={{ width: 36, height: 36 }}
+        /> */}
+
+        {/* //to set dynamic icon */}
         <IconButton
           size="small"
           sx={{ ml: 2 }}
@@ -75,6 +89,7 @@ export default function SideMenu() {
         >
           <Avatar sx={{ width: 32, height: 32 }}>{currentUser.name[0]}</Avatar>
         </IconButton>
+
         <Box sx={{ mr: "auto" }}>
           <Typography
             variant="body2"

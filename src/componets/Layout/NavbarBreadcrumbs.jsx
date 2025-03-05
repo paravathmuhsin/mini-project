@@ -22,6 +22,21 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
 //console.log(urlSegments);
 
 export default function NavbarBreadcrumbs() {
+
+  // const location = useLocation(); // Get the current location object
+  // const [page, setPage] = useState('Home');
+
+  // useEffect(() => {
+  //   const urlSegments = window.location.href.split('/').filter((segment) => segment);
+  //   //console.log(location);
+  //   // Set the page state based on the URL segments
+  //   if (urlSegments[2] == null) {
+  //     setPage("Home");  // If there's no third segment, set it to "Home"
+  //   } else {
+  //     setPage(urlSegments[2]);  // Otherwise, set it to the third URL segment
+  //   }
+  // }, [location]);
+  
   const { appBreadcrumbs } = useAppContext();
 
   return (

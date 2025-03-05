@@ -13,6 +13,8 @@ const CommentList = lazy(() => import("../../pages/Comments/CList"));
 const CommentDetails = lazy(() => import("../../pages/Comments/CDetails"));
 const PhotosList = lazy(() => import("../../pages/Photos/PhotosList"));
 const Photos = lazy(() => import("../../pages/Photos/Photos"));
+const UserList2= lazy(() => import("../../pages/Users2/UserList"));
+const UserDetails2= lazy(() => import("../../pages/Users2/Details"));
 
 const AppRouter = () => {
   return (
@@ -29,6 +31,8 @@ const AppRouter = () => {
           <Route path="comments/:id" element={<CommentDetails />} />
           <Route path="photos" element={<PhotosList />} />
           <Route path="photos/:id" element={<Photos />} />
+          <Route path="users2" element={<UserList2/>} />
+          <Route path="users2/:id" element={<UserDetails2/>} />
         </Route>
         <Route path="sign-in" element={<SignIn />} />
 

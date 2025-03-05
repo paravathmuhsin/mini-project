@@ -17,6 +17,7 @@ const mainListItems = [
   { text: "Todos", to: "/todos", icon: <Task /> },
   { text: "Comments", to: "/comments", icon: <CommentRoundedIcon /> },
   { text: "Photos", to: "/photos", icon: <PhotoLibraryIcon /> },
+  { text: "Users2", to: "/users2", icon: <PeopleRoundedIcon /> }
 ];
 
 export default function MenuContent() {

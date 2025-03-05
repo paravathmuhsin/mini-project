@@ -1,14 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { gettodos } from "../../services/post.service";
+import { getTodos } from "../../services/todos.service";
 import "./style.scss";
+import { useAppContext } from "../../componets/AppContext/AppContext";
 
 const List = () => {
   const [todos, setTodos] = useState([]);
   useEffect(() => {
-    gettodos().then((res) => {
+    getTodos().then((res) => {
       setTodos(res);
     });
+  }, []);
+  const { setPageTitle, setAppBreadcrumbs } = useAppContext();
+
+  useEffect(() => {
+    setPageTitle("Todos");
+    setAppBreadcrumbs([
+      {
+        label: "Todos list",
+      },
+    ]);
   }, []);
   return (
     <>
